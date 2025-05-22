@@ -1,0 +1,87 @@
+.login-page {
+  background-image: url('/images/itmnorte.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay {
+  position: absolute;
+  inset: 0; /* top: 0; bottom: 0; left: 0; right: 0 */
+  background-color: rgba(200, 0, 0, 0.4); /* Rojo semitransparente */
+  z-index: 1;
+}
+
+.login-form {
+  position: relative;
+  z-index: 2;
+  max-width: 400px;
+  padding: 2rem 1rem; /* Ajusta el padding interno */
+  border-radius: 8px;
+  color: white;
+}
+
+.login-form input::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Cambia el color del placeholder a un blanco semitransparente */
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 20px; /* Espacio entre texto e inputs */
+}
+
+.login-header h1 {
+  margin-bottom: 10px;
+}
+
+.login-header span {
+  font-size: 13px;
+  color: #cccccc;
+  display: block;
+  margin-bottom: 25px;
+}
+
+.login-buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.login-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.login-logos img {
+  object-fit: contain;
+}
+
+.login-logos img:first-child {
+  height: 80px; 
+}
+
+.login-logos img:last-child {
+  height: 100px; 
+}
+.login-separator {
+  width: 2px;
+  height: 50px; 
+  background-color: white;
+  opacity: 0.6;
+  margin: 0 10px;
+}
+
+.error {
+  color: #ffc107;
+  font-size: 14px;
+  text-align: center;
+}

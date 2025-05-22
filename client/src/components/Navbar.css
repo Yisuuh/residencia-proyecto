@@ -1,0 +1,108 @@
+.navbar {
+  height: 60px;
+  background-color: #7E122A;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-notifications {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+}
+
+.user-photo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #f0f0f0;
+}
+
+/* 📱 Responsivo: Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar-title {
+    font-size: 16px;
+  }
+
+  .navbar-right {
+    gap: 10px;
+  }
+
+  .user-name,
+  .user-email {
+    font-size: 10px;
+  }
+
+  .navbar-notifications {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .user-info {
+    display: none;
+  }
+
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .navbar-title {
+    font-size: 14px;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
+  .navbar {
+    padding: 0 12px;
+  }
+}

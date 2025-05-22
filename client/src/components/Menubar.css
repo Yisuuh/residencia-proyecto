@@ -1,0 +1,177 @@
+.sidebar {
+  width: 250px;
+  background-color: #991731;
+  color: white;
+  height: calc(100vh - 60px); /* Resta la altura del Navbar (ajusta 60px según el tamaño real del Navbar) */
+  display: flex;
+  flex-direction: column; /* Organiza los elementos en una columna */
+  transition: width 0.3s;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+/* Reducción del padding para hacer el item más pequeño */
+.menu li,
+.logout {
+  padding: 10px 15px; /* Más pequeño para que sea más compacto */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  min-width: 0;
+  max-width: 100%;     /* ✅ Limita el ancho */
+  margin: 10px;   /* ✅ Centra los ítems */
+  border-radius: 8px;
+}
+
+/* El hover se mantiene con una ligera escala sin mover el item */
+.menu li:hover,
+.logout:hover {
+  background-color: #88142D;
+  transform: scale(1.03); /* Usa escala para efecto de resaltado */
+  border-radius: 8px;
+}
+
+/* Ajustamos la posición del borde dorado, pero solo será visible cuando el ítem esté activo */
+.menu li::before,
+.logout::before {
+  content: "";
+  position: absolute;
+  left: 0; /* Asegura que la línea esté alineada al borde */
+  top: 8px; 
+  bottom: 8px;
+  width: 3px; /* Hacemos la línea un poco más delgada */
+  background-color: #FFD700;
+  border-radius: 2px;
+  opacity: 0; /* Inicialmente la línea no es visible */
+  transition: opacity 0.3s ease;
+}
+
+/* Solo mostramos la línea dorada cuando el ítem está activo (seleccionado) */
+.menu li.active::before,
+.logout.active::before {
+  opacity: 1; /* La línea siempre se ve cuando el ítem está activo */
+}
+
+/* Animación de los iconos y el texto */
+.menu li i,
+.logout i {
+  margin-right: 8px; /* Reducimos el margen para compactar el diseño */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu li:hover i,
+.logout:hover i,
+.menu li.active i,
+.logout.active i {
+  color: #FFD700;
+}
+
+/* Animación de los textos */
+.menu-text {
+  display: inline-block;
+  white-space: nowrap;
+  opacity: 1;
+  max-width: 150px; /* Reducimos el ancho para que no haya tanto espacio extra */
+  transition:
+    opacity 0.4s ease-in-out,
+    transform 0.4s ease-in-out,
+    max-width 0.4s ease-in-out,
+    filter 0.4s ease-in-out;
+  filter: blur(0);
+}
+
+.menu-text.hidden {
+  opacity: 0;
+  max-width: 0;
+  transform: translateX(-12px);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Estado activo */
+.menu li.active,
+.logout.active {
+  background-color: #88142D;
+}
+
+.menu li.active i,
+.logout.active i {
+  color: #FFD700;
+}
+
+.menu li.active .menu-text,
+.logout.active .menu-text {
+  color: #FFD700;
+}
+
+/* Aseguramos que el menú se ajuste bien */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px; /* Aumentamos ligeramente */
+  }
+
+  .sidebar.collapsed {
+    width: 70px; /* Más ancho que antes para mejor visibilidad */
+  }
+
+  .menu li {
+    padding: 12px 16px;
+  }
+
+  .menu-text {
+    max-width: 130px;
+  }
+
+  .menu-text.hidden {
+    max-width: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@media (max-width: 500px) {
+  .sidebar {
+    width: 180px; /* También lo aumentamos aquí */
+  }
+
+  .sidebar.collapsed {
+    width: 60px; /* Mejor visibilidad del ícono */
+  }
+
+  .menu-text {
+    font-size: 12px;
+    max-width: 110px;
+  }
+
+  .menu-text.hidden {
+    max-width: 0;
+    transform: translateX(-8px);
+  }
+}

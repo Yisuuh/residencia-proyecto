@@ -1,0 +1,34 @@
+.input-field {
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.input-icon {
+  color: white; /* Cambia el color del ícono */
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: white;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+}
+
+.input-container input::placeholder {
+  color: white;
+}

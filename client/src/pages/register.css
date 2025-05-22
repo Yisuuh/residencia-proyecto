@@ -1,0 +1,72 @@
+.register-page {
+  background-image: url('/images/itmnorte.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0; /* top: 0; bottom: 0; left: 0; right: 0 */
+  background-color: rgba(200, 0, 0, 0.4); /* Rojo semitransparente */
+  z-index: 1;
+}
+
+.register-form {
+  position: relative;
+  z-index: 2;
+  max-width: 400px;
+  padding: 2rem 1rem; /* Ajusta el padding interno */
+  border-radius: 8px;
+  color: white;
+}
+.register-form input::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Cambia el color del placeholder a un blanco semitransparente */
+}
+
+.register-form::-webkit-scrollbar {
+  width: 6px;
+}
+.register-form::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.register-header h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.register-header span {
+  text-align: center;
+  font-size: 1rem;
+  color: #cccccc;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.register-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.error {
+  color: #ffc107;
+  font-size: 14px;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  text-align: center;
+}
+
