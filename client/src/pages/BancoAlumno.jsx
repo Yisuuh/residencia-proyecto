@@ -18,7 +18,7 @@ const BancoAlumno = ({ user, menuItems }) => {
     const fetchProyectos = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const res = await axios.get("http://127.0.0.1:8000/api/banco_proyectos/formulario_proyecto/", {
+        const res = await axios.get("https://residencia-proyecto.onrender.com/api/banco_proyectos/formulario_proyecto/", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setProyectos(res.data);

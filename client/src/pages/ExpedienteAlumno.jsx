@@ -19,7 +19,7 @@ const ExpedienteAlumno = () => {
 
         // Obtener documentos predefinidos
         const predefinidosResponse = await axios.get(
-          "http://127.0.0.1:8000/api/expediente/documentos_predefinidos/",
+          "https://residencia-proyecto.onrender.com/api/expediente/documentos_predefinidos/",
           {
             headers: {
               Authorization: `Bearer ${token}`,

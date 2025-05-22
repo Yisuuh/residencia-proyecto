@@ -96,7 +96,7 @@ const GestionProyectos = ({ user }) => {
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/api/banco_proyectos/formulario_proyecto/",
+        "https://residencia-proyecto.onrender.com/api/banco_proyectos/formulario_proyecto/",
         formData,
         {
           headers: {

@@ -11,7 +11,7 @@ const DashboardAlumno = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const response = await axios.get("http://127.0.0.1:8000/api/users/me/", {
+        const response = await axios.get("https://residencia-proyecto.onrender.com/api/users/me/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -37,7 +37,7 @@ const DashboardAlumno = () => {
       data.append("telefono", formData.telefono);
       data.append("foto", formData.foto);
 
-      await axios.put("http://127.0.0.1:8000/api/users/completar-perfil/", data, {
+      await axios.put("https://residencia-proyecto.onrender.com/api/users/completar-perfil/", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
