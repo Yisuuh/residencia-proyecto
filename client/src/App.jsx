@@ -47,6 +47,16 @@ const AppContent = ({ user, setUser }) => {
         <Route path="/register" element={<Register setUser={setUser} />} /> {/* Pasa setUser */}
         <Route path="/register-empresa" element={<RegisterEmpresa />} />
         <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Navigate to="/dashboard/alumno" />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
           path="/dashboard/alumno"
           element={
             <ProtectedRoute>
