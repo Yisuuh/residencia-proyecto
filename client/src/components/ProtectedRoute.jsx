@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
 
       try {
         // Verifica si el token de acceso es válido
-        await axios.get("https://residencia-proyecto.onrender.com/api/users/me/", {
+        await axios.get("/api/users/me/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -28,7 +28,7 @@ const ProtectedRoute = ({ children }) => {
           if (refreshToken) {
             try {
               const response = await axios.post(
-                "https://residencia-proyecto.onrender.com/api/token/refresh/",
+                "/api/token/refresh/",
                 { refresh: refreshToken }
               );
               localStorage.setItem("access_token", response.data.access);

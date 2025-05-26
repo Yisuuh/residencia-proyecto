@@ -19,7 +19,7 @@ const DashboardJefeCarrera = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const response = await axios.get("https://residencia-proyecto.onrender.com/api/users/me/", {
+        const response = await axios.get("/api/users/me/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

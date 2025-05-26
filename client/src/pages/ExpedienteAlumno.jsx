@@ -19,7 +19,7 @@ const ExpedienteAlumno = () => {
 
         // Obtener documentos predefinidos
         const predefinidosResponse = await axios.get(
-          "https://residencia-proyecto.onrender.com/api/expediente/documentos_predefinidos/",
+          "/api/expediente/documentos_predefinidos/",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ const ExpedienteAlumno = () => {
 
         // Obtener documentos del alumno
         const alumnoResponse = await axios.get(
-          "http://127.0.0.1:8000/api/expediente/documentos/",
+          "/api/expediente/documentos/",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const ExpedienteAlumno = () => {
     try {
       const token = localStorage.getItem("access_token");
       await axios.put(
-        `http://127.0.0.1:8000/api/expediente/documentos/${currentDocumento.id}/`,
+        `/api/expediente/documentos/${currentDocumento.id}/`,
         formData,
         {
           headers: {
@@ -111,7 +111,7 @@ const ExpedienteAlumno = () => {
       archivo: documentoAlumno?.archivo
         ? documentoAlumno.archivo.startsWith("http")
           ? documentoAlumno.archivo // Si ya es una URL completa, úsala directamente
-          : `http://127.0.0.1:8000${documentoAlumno.archivo}` // Si es relativa, agrega la base
+          : `https://residencia-proyecto.onrender.com${documentoAlumno.archivo}` // Si es relativa, agrega la base
         : null,
     };
   });

@@ -30,7 +30,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ['id', 'email', 'password', 'role', 'is_active', 'is_staff']
+        fields = ['id', 'email','nombres','primer_apellido', 'password', 'role', 'is_active', 'is_staff']
         extra_kwargs = {
             'password': {'write_only': True},
         }

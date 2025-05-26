@@ -139,8 +139,8 @@ class UsuarioListView(generics.ListAPIView):
     serializer_class = UsuarioSerializer  # O uno solo de lectura
     permission_classes = [IsAuthenticated]  # O permisos más restrictivos
 
-class UsuarioDetailView(generics.RetrieveUpdateAPIView):
+class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [IsAuthenticated]
-    lookup_field = "id"  # O "pk" si usas el campo por defecto
+    lookup_field = "id"

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://residencia-proyecto.onrender.com/api/users"; // Cambia según tu configuración
+const API_URL = "/api/users"; // Cambia según tu configuración
 
 export const login = async (email, password) => {
   try {
@@ -55,7 +55,7 @@ export const registerEmpresa = async (formData) => {
 export const fetchCurrentUser = async () => {
   const token = localStorage.getItem("access_token");
   if (!token) throw new Error("No token found");
-  const response = await axios.get("https://residencia-proyecto.onrender.com/api/users/me/", {
+  const response = await axios.get("/api/users/me/", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
