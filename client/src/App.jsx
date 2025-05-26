@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import RegisterEmpresa from "./pages/RegisterEmpresa";
@@ -48,13 +48,7 @@ const AppContent = ({ user, setUser }) => {
         <Route path="/register-empresa" element={<RegisterEmpresa />} />
         <Route
           path="/"
-          element={
-            isAuthenticated ? (
-              <Navigate to="/dashboard/alumno" />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          element={<Navigate to="/login" />}
         />
         <Route
           path="/dashboard/alumno"
