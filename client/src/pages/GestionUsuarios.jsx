@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
+import "./GestionUsuarios.css";
 
 const menuItems = [
   { name: "Inicio", path: "/dashboard/jefe/", icon: "ri-home-line" },
@@ -27,7 +28,7 @@ const GestionUsuarios = ({ user }) => {
     email: "",
     nombres: "",
     primer_apellido: "",
-    segundo_apellido: "", // <-- Agregado
+    segundo_apellido: "",
     password: "",
     confirm_password: "",
     role: "alumno",
@@ -52,25 +53,6 @@ const GestionUsuarios = ({ user }) => {
     fetchUsuarios();
   }, []);
 
-  // Cambiar rol de usuario
-  const handleRoleChange = async (userId, newRole) => {
-    try {
-      const token = localStorage.getItem("access_token");
-      await axios.patch(
-        `/api/users/usuarios/${userId}/`,
-        { role: newRole },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setUsuarios(usuarios =>
-        usuarios.map(u =>
-          u.id === userId ? { ...u, role: newRole } : u
-        )
-      );
-    } catch (error) {
-      alert("No se pudo actualizar el rol.");
-    }
-  };
-
   // Manejar cambios en el formulario
   const handleInputChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
@@ -89,7 +71,7 @@ const GestionUsuarios = ({ user }) => {
         email: "",
         nombres: "",
         primer_apellido: "",
-        segundo_apellido: "", // <-- Agregado
+        segundo_apellido: "",
         password: "",
         confirm_password: "",
         role: "alumno",
@@ -115,41 +97,37 @@ const GestionUsuarios = ({ user }) => {
   };
 
   return (
-    <Layout menuItems={menuItems} user={user}>
-      <h2>Gestión de Usuarios</h2>
-      <button onClick={() => setShowModal(true)}>Añadir usuario</button>
+    <>
+      <div className="usuarios-header">
+        <h2>Gestión de Usuarios</h2>
+        <button className="btn-add-usuario" onClick={() => setShowModal(true)}>
+          Añadir usuario
+        </button>
+      </div>
       {showModal && (
-        <div className="modal" style={{
-          position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
-          background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000
-        }}>
-          <form
-            onSubmit={handleAddUser}
-            style={{
-              background: "#fff", padding: 24, borderRadius: 8, minWidth: 320, boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
-            }}
-          >
+        <div className="modal-usuarios">
+          <form className="form-usuarios" onSubmit={handleAddUser}>
             <h3>Nuevo Usuario</h3>
-            <input name="email" value={newUser.email} onChange={handleInputChange} placeholder="Email" required />
-            <input name="nombres" value={newUser.nombres} onChange={handleInputChange} placeholder="Nombres" required />
-            <input name="primer_apellido" value={newUser.primer_apellido} onChange={handleInputChange} placeholder="Primer Apellido" required />
-            <input name="segundo_apellido" value={newUser.segundo_apellido} onChange={handleInputChange} placeholder="Segundo Apellido" required /> {/* <-- Agregado */}
-            <input name="password" type="password" value={newUser.password} onChange={handleInputChange} placeholder="Contraseña" required />
-            <input name="confirm_password" type="password" value={newUser.confirm_password} onChange={handleInputChange} placeholder="Confirmar Contraseña" required />
-            <select name="role" value={newUser.role} onChange={handleInputChange}>
+            <input className="input-usuario" name="email" value={newUser.email} onChange={handleInputChange} placeholder="Email" required />
+            <input className="input-usuario" name="nombres" value={newUser.nombres} onChange={handleInputChange} placeholder="Nombres" required />
+            <input className="input-usuario" name="primer_apellido" value={newUser.primer_apellido} onChange={handleInputChange} placeholder="Primer Apellido" required />
+            <input className="input-usuario" name="segundo_apellido" value={newUser.segundo_apellido} onChange={handleInputChange} placeholder="Segundo Apellido" required />
+            <input className="input-usuario" name="password" type="password" value={newUser.password} onChange={handleInputChange} placeholder="Contraseña" required />
+            <input className="input-usuario" name="confirm_password" type="password" value={newUser.confirm_password} onChange={handleInputChange} placeholder="Confirmar Contraseña" required />
+            <select className="input-usuario" name="role" value={newUser.role} onChange={handleInputChange}>
               {roles.map(r => (
                 <option key={r.value} value={r.value}>{r.label}</option>
               ))}
             </select>
-            <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
-              <button type="submit">Guardar</button>
-              <button type="button" onClick={() => setShowModal(false)}>Cancelar</button>
+            <div className="form-usuarios-actions">
+              <button className="btn-guardar" type="submit">Guardar</button>
+              <button className="btn-cancelar" type="button" onClick={() => setShowModal(false)}>Cancelar</button>
             </div>
           </form>
         </div>
       )}
-      <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+      <div className="usuarios-table-container">
+        <table className="usuarios-table">
           <thead>
             <tr>
               <th>Email</th>
@@ -177,28 +155,13 @@ const GestionUsuarios = ({ user }) => {
                   <td>{u.nombres}</td>
                   <td>{u.primer_apellido}</td>
                   <td>
-                    <select
-                      value={u.role}
-                      onChange={e => handleRoleChange(u.id, e.target.value)}
-                    >
-                      {roles.map(r => (
-                        <option key={r.value} value={r.value}>{r.label}</option>
-                      ))}
-                    </select>
+                    <span>
+                      {roles.find(r => r.value === u.role)?.label || u.role}
+                    </span>
                   </td>
                   <td>
-                    {/* Botón para editar (si lo tienes) */}
-                    {/* <button onClick={() => handleEdit(u.id)}>Editar</button> */}
                     <button
-                      style={{
-                        background: "#d32f2f",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: 4,
-                        padding: "4px 12px",
-                        cursor: "pointer",
-                        marginLeft: 8
-                      }}
+                      className="btn-eliminar"
                       onClick={() => handleDeleteUser(u.id)}
                     >
                       Eliminar
@@ -210,7 +173,7 @@ const GestionUsuarios = ({ user }) => {
           </tbody>
         </table>
       </div>
-    </Layout>
+    </>
   );
 };
 

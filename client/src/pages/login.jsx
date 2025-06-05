@@ -72,6 +72,7 @@ const Login = ({ setUser }) => {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
+                color: "white",
                 padding: 0
               }}
               tabIndex={-1}

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Sidebar from "./Menubar";
-import "./Layout.css"; // Archivo CSS para estilos
+import "./Layout.css";
 
 const Layout = ({ menuItems, children, user }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   return (
     <div className="layout">
+      <Navbar user={user} />
       <div className="layout-container">
         <Sidebar
           menuItems={menuItems}
@@ -15,7 +17,7 @@ const Layout = ({ menuItems, children, user }) => {
           setIsCollapsed={setIsSidebarCollapsed}
         />
         <div className={`layout-content ${isSidebarCollapsed ? "collapsed" : ""}`}>
-          {children} {/* Aquí se inyectará el contenido específico de cada página */}
+          <Outlet />
         </div>
       </div>
     </div>

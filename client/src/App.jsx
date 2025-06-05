@@ -6,7 +6,6 @@ import RegisterEmpresa from "./pages/RegisterEmpresa";
 import DashboardAlumno from "./pages/DashboardAlumno";
 import ExpedienteAlumno from "./pages/ExpedienteAlumno";
 import VisorPDF from "./pages/VisorPDF";
-import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import axios from "axios";
 import 'remixicon/fonts/remixicon.css';
@@ -15,10 +14,15 @@ import GestionProyectos from "./pages/gestion_proyectos";
 import BancoAlumno from "./pages/BancoAlumno";
 import DashboardJefeCarrera from "./pages/DashboardJefeCarrera";
 import GestionUsuarios from "./pages/GestionUsuarios";
+import Layout from "./components/Layout";
+import ResidentesEmpresa from "./pages/ResidentesEmpresa";
+import ResidentesAprobados from "./pages/ResidentesAprobados";
+import EstadoProyecto from "./pages/EstadoProyecto";
+import ExpedienteJefe from "./pages/ExpedienteJefe";
 
 const alumnoMenuItems = [
   { name: "Inicio", path: "/dashboard/alumno/", icon: "ri-home-line" },
-  { name: "Estado del Proyecto", path: "/dashboard/alumno/estado", icon: "ri-file-list-line" },
+  { name: "Estado del Proyecto", path: "/dashboard/alumno/estado-proyecto", icon: "ri-file-list-line" },
   { name: "Banco de Proyectos", path: "/dashboard/alumno/banco", icon: "ri-database-2-line" },
   { name: "Expediente", path: "/dashboard/alumno/expediente", icon: "ri-folder-line" },
 ];
@@ -33,6 +37,13 @@ const jefeMenuItems = [
   { name: "Expedientes", path: "/dashboard/jefe/expedientes", icon: "ri-folder-line" },
 ];
 
+const empresaMenuItems = [
+    { name: "Inicio", path: "/dashboard/empresa/", icon: "ri-home-line" },
+    { name: "Gestión de Proyectos", path: "/dashboard/empresa/gestion-proyectos", icon: "ri-briefcase-4-line" },
+    { name: "Solicitudes", path: "/dashboard/empresa/solicitudes", icon: "ri-inbox-2-line" },
+    { name: "Residentes", path: "/dashboard/empresa/aprobados", icon: "ri-group-line" },
+  ];
+
 const AppContent = ({ user, setUser }) => {
   const location = useLocation();
 
@@ -41,7 +52,6 @@ const AppContent = ({ user, setUser }) => {
 
   return (
     <>
-      {!hideNavbar && <Navbar user={user} />} {/* Renderiza el Navbar solo si no estás en Login o Register */}
       <Routes>
         <Route path="/login" element={<Login setUser={setUser} />} /> {/* Pasa setUser */}
         <Route path="/register" element={<Register setUser={setUser} />} /> {/* Pasa setUser */}
@@ -51,69 +61,29 @@ const AppContent = ({ user, setUser }) => {
           element={<Navigate to="/login" />}
         />
         <Route
-          path="/dashboard/alumno"
+          path="/dashboard/*"
           element={
             <ProtectedRoute>
-              <DashboardAlumno />
+              <Layout
+                menuItems={user.role === 'empresa' ? empresaMenuItems : user.role === 'alumno' ? alumnoMenuItems : jefeMenuItems}
+                user={user}
+              />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/dashboard/alumno/expediente"
-          element={
-            <ProtectedRoute>
-              <ExpedienteAlumno />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard/alumno/banco"
-          element={
-            <ProtectedRoute>
-              <BancoAlumno menuItems={alumnoMenuItems} />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard/empresa"
-          element={
-            <ProtectedRoute>
-              <DashboardEmpresa />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard/empresa/gestion-proyectos"
-          element={
-            <ProtectedRoute>
-              <GestionProyectos />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard/jefe"
-          element={
-            <ProtectedRoute>
-              <DashboardJefeCarrera />
-            </ProtectedRoute>
-          }
-        />
-         <Route
-          path="/dashboard/jefe/usuarios"
-          element={
-            <ProtectedRoute>
-              <GestionUsuarios />
-            </ProtectedRoute>
-          }
-        />
-         <Route
-          path="/dashboard/jefe/banco"
-          element={
-            <ProtectedRoute>
-              <BancoAlumno menuItems={jefeMenuItems} />
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route path="alumno" element={<DashboardAlumno />} />
+          <Route path="alumno/expediente" element={<ExpedienteAlumno />} />
+          <Route path="alumno/banco" element={<BancoAlumno user={user} menuItems={alumnoMenuItems} />} />
+          <Route path="alumno/estado-proyecto" element={<EstadoProyecto />} />
+          <Route path="empresa" element={<DashboardEmpresa />} />
+          <Route path="empresa/gestion-proyectos" element={<GestionProyectos />} />
+          <Route path="empresa/solicitudes" element={<ResidentesEmpresa />} />
+          <Route path="empresa/aprobados" element={<ResidentesAprobados />} />
+          <Route path="jefe" element={<DashboardJefeCarrera />} />
+          <Route path="jefe/usuarios" element={<GestionUsuarios />} />
+          <Route path="jefe/banco" element={<BancoAlumno />} />
+          <Route path="jefe/expedientes" element={<ExpedienteJefe />} />
+        </Route>
         <Route path="/visor-pdf" element={<VisorPDF />} />
       </Routes>
     </>

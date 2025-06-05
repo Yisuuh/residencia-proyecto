@@ -31,3 +31,5 @@ urlpatterns = [
     path('api/banco_proyectos/', include('banco_proyectos.urls')),
     re_path(r'^.*$', FrontendAppView.as_view(), name='frontend'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

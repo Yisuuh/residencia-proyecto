@@ -34,12 +34,12 @@ const DashboardJefeCarrera = () => {
   }, []);
 
   return (
-    <Layout menuItems={menuItems} user={user}>
+    <>
       <h1>Bienvenido, {user.nombres || user.name}</h1>
       <p>Tu correo electrónico es: {user.email}</p>
       <p>Selecciona una opción del menú para continuar.</p>
       {/* Aquí puedes agregar widgets, estadísticas o accesos rápidos para el jefe de carrera */}
-    </Layout>
+    </>
   );
 };
 

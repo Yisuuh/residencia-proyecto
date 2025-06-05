@@ -1,10 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
 
+User = get_user_model()
+
 class FormularioProyecto(models.Model):
-    # Datos generales
+    # Datos generalesç
+    empresa = models.ForeignKey(User, on_delete=models.CASCADE, related_name="proyectos")
     nombre_responsable = models.CharField(max_length=255)
     correo = models.EmailField()
     telefono = models.CharField(max_length=15)
@@ -63,5 +67,12 @@ class FormularioProyecto(models.Model):
 
     observaciones = models.TextField(blank=True, null=True)
     imagen = models.ImageField(upload_to='proyectos_imagenes/', null=True, blank=True)
+    fecha_subida = models.DateField( blank=True, null=True)
 
+# models.py
+class AplicacionProyecto(models.Model):
+    alumno = models.ForeignKey(User, on_delete=models.CASCADE)
+    proyecto = models.ForeignKey('FormularioProyecto', on_delete=models.CASCADE)
+    estado = models.CharField(max_length=20, choices=[('pendiente', 'Pendiente'), ('aceptado', 'Aceptado'), ('rechazado', 'Rechazado')], default='pendiente')
+    fecha_aplicacion = models.DateTimeField(auto_now_add=True)
 

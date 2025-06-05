@@ -11,40 +11,39 @@ const ExpedienteAlumno = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDocumento, setCurrentDocumento] = useState(null); // Documento seleccionado
   const [modalFile, setModalFile] = useState(null); // Archivo seleccionado en el modal
+  const [proyecto, setProyecto] = useState(null); // Nuevo estado para el proyecto
 
   useEffect(() => {
-    const fetchDocumentos = async () => {
+    const fetchAll = async () => {
       try {
         const token = localStorage.getItem("access_token");
 
-        // Obtener documentos predefinidos
+        // Proyecto aceptado
+        const proyectoRes = await axios.get(
+          "/api/banco_proyectos/alumno/proyecto-aceptado/",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setProyecto(proyectoRes.data);
+
+        // Documentos predefinidos
         const predefinidosResponse = await axios.get(
           "/api/expediente/documentos_predefinidos/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         setDocumentosPredefinidos(predefinidosResponse.data);
 
-        // Obtener documentos del alumno
+        // Documentos del alumno
         const alumnoResponse = await axios.get(
           "/api/expediente/documentos/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
-        console.log("Documentos del alumno:", alumnoResponse.data); // Verifica la respuesta
         setDocumentosAlumno(alumnoResponse.data);
       } catch (error) {
-        console.error("Error al obtener los documentos:", error);
+        console.error("Error al obtener los datos:", error);
       }
     };
 
-    fetchDocumentos();
+    fetchAll();
   }, []);
 
   const openModal = (documento) => {
@@ -116,20 +115,38 @@ const ExpedienteAlumno = () => {
     };
   });
 
+  // Cálculo del porcentaje de avance
+  const totalDocs = documentosPredefinidos.length;
+  const aprobados = documentosAlumno.filter(
+    (doc) => doc.estado === "aprobado"
+  ).length;
+  const porcentaje = totalDocs > 0 ? Math.round((aprobados / totalDocs) * 100) : 0;
+
   return (
-    <Layout
-      menuItems={[
-        { name: "Inicio", path: "/dashboard/alumno/", icon: "ri-home-line" },
-        { name: "Estado del Proyecto", path: "/dashboard/alumno/estado", icon: "ri-file-list-line" },
-        { name: "Banco de Proyectos", path: "/dashboard/alumno/banco", icon: "ri-database-2-line" },
-        { name: "Expediente", path: "/dashboard/alumno/expediente", icon: "ri-folder-line" },
-      ]}
-    >
+    <>
       <div className="expediente-container">
         <h1 className="expediente-title">Expediente del Alumno</h1>
+        {/* NUEVO: Info del proyecto */}
+        {proyecto && (
+          <div className="expediente-proyecto-info">
+            <strong>Proyecto asignado:</strong> {proyecto.nombre_proyecto} <br />
+            <strong>Responsable:</strong> {proyecto.nombre_responsable}
+          </div>
+        )}
+        {/* NUEVO: Porcentaje de avance */}
+        <div className="expediente-avance">
+          <strong>Avance:</strong> {porcentaje}%
+          <div className="expediente-barra-avance">
+            <div
+              className="expediente-barra-avance-inner"
+              style={{ width: `${porcentaje}%` }}
+            ></div>
+          </div>
+        </div>
         <p className="expediente-desc">
-          En esta sección podrás cargar los documentos necesarios para completar el proceso de Residencia Profesional. 
-          Asegúrate de incluir todos los archivos requeridos.
+          En esta sección podrás cargar los documentos necesarios para completar el
+          proceso de Residencia Profesional. Asegúrate de incluir todos los archivos
+          requeridos.
         </p>
         <table className="expediente-table">
           <thead>
@@ -150,19 +167,50 @@ const ExpedienteAlumno = () => {
                 <td>{doc.nombre}</td>
                 <td className={`estado ${doc.estado.toLowerCase()}`}>
                   {doc.estado.toLowerCase() === "aprobado" && (
-                    <i className="ri-check-line" style={{ color: "#2ecc71", fontSize: "1.2rem", verticalAlign: "middle", fontWeight: 200, filter: "brightness(1.2) opacity(0.8)" }}></i>
+                    <i
+                      className="ri-check-line"
+                      style={{
+                        color: "#2ecc71",
+                        fontSize: "1.2rem",
+                        verticalAlign: "middle",
+                        fontWeight: 200,
+                        filter: "brightness(1.2) opacity(0.8)",
+                      }}
+                    ></i>
                   )}
                   {doc.estado.toLowerCase() === "rechazado" && (
-                    <i className="ri-close-line" style={{ color: "#e74c3c", fontSize: "1.2rem", verticalAlign: "middle", fontWeight: 200, filter: "brightness(1.2) opacity(0.8)" }}></i>
+                    <i
+                      className="ri-close-line"
+                      style={{
+                        color: "#e74c3c",
+                        fontSize: "1.2rem",
+                        verticalAlign: "middle",
+                        fontWeight: 200,
+                        filter: "brightness(1.2) opacity(0.8)",
+                      }}
+                    ></i>
                   )}
                   {doc.estado.toLowerCase() === "pendiente" && (
-                    <i className="ri-time-line" style={{ color: "#888", fontSize: "1.2rem", verticalAlign: "middle", fontWeight: 200, filter: "brightness(1.2) opacity(0.8)" }}></i>
+                    <i
+                      className="ri-time-line"
+                      style={{
+                        color: "#888",
+                        fontSize: "1.2rem",
+                        verticalAlign: "middle",
+                        fontWeight: 200,
+                        filter: "brightness(1.2) opacity(0.8)",
+                      }}
+                    ></i>
                   )}
                 </td>
                 <td>{doc.fecha_programada}</td>
                 <td>{doc.fecha_envio}</td>
                 <td>
-                  <button className="btn-accion btn-upload" onClick={() => openModal(doc)} title="Subir archivo">
+                  <button
+                    className="btn-accion btn-upload"
+                    onClick={() => openModal(doc)}
+                    title="Subir archivo"
+                  >
                     <i className="ri-upload-2-line"></i>
                   </button>
                   {doc.archivo && (
@@ -178,10 +226,13 @@ const ExpedienteAlumno = () => {
                         padding: 0,
                         marginLeft: 6,
                         marginRight: 0,
-                        cursor: "pointer"
+                        cursor: "pointer",
                       }}
                     >
-                      <i className="ri-eye-line" style={{ fontSize: "1.3rem", color: "#27ae60" }}></i>
+                      <i
+                        className="ri-eye-line"
+                        style={{ fontSize: "1.3rem", color: "#27ae60" }}
+                      ></i>
                     </button>
                   )}
                 </td>
@@ -211,7 +262,7 @@ const ExpedienteAlumno = () => {
           <button onClick={closeModal}>Cancelar</button>
         </div>
       </Modal>
-    </Layout>
+    </>
   );
 };
 

@@ -31,11 +31,11 @@ const DashboardEmpresa = () => {
   ];
 
   return (
-    <Layout menuItems={menuItems} user={user}>
+    <>
       <h1>Bienvenido, {user.name}</h1>
       <p>Tu correo electrónico es: {user.email}</p>
       <p>Selecciona una opción del menú para continuar.</p>
-    </Layout>
+    </>
   );
 };
 

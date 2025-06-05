@@ -1,0 +1,112 @@
+.expediente-jefe-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: auto;
+  padding: 0px 20px 20px 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.expediente-jefe-table {
+  width: 100%;
+  table-layout: fixed;
+  word-break: break-word;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: white;
+}
+
+.expediente-jefe-table th,
+.expediente-jefe-table td {
+  border: none;
+  padding: 6px 6px;
+  text-align: center;
+  font-size: 0.97rem;
+}
+
+/* Ajusta el ancho de las columnas para mejor visual */
+.expediente-jefe-table th:nth-child(1),
+.expediente-jefe-table td:nth-child(1) {
+  width: 80px;
+  min-width: 80px;
+  max-width: 100px;
+}
+
+.expediente-jefe-table th:nth-child(2),
+.expediente-jefe-table td:nth-child(2) {
+  width: 220px;
+  min-width: 160px;
+  max-width: 260px;
+  text-align: left;
+  padding-top: 7px;
+  padding-bottom: 10px;
+}
+
+.expediente-jefe-table th:nth-child(3),
+.expediente-jefe-table td:nth-child(3) {
+  min-width: 120px;
+  max-width: 200px;
+  text-align: left;
+}
+
+.expediente-jefe-table th:nth-child(4),
+.expediente-jefe-table td:nth-child(4),
+.expediente-jefe-table th:nth-child(5),
+.expediente-jefe-table td:nth-child(5) {
+  min-width: 90px;
+  max-width: 140px;
+}
+
+.expediente-jefe-table th:nth-child(6),
+.expediente-jefe-table td:nth-child(6) {
+  min-width: 60px;
+  max-width: 80px;
+}
+
+.expediente-jefe-table th {
+  background-color: #CAC4D0;
+  color: #333;
+  font-weight: 500;
+  border: none;
+}
+
+.expediente-jefe-table tr {
+  border-bottom: 1px solid #CAC4D0;
+}
+
+.expediente-jefe-table tr:last-child {
+  border-bottom: none;
+}
+
+.btn-accion.btn-eye {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #27ae60;
+  padding: 0;
+  margin-left: 6px;
+  margin-right: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.btn-accion.btn-eye i {
+  color: #27ae60;
+  font-size: 1.3rem;
+}
+
+.btn-accion.btn-eye:hover,
+.btn-accion.btn-eye:focus {
+  color: #219150;
+}
+
+.btn-accion.btn-eye:hover i,
+.btn-accion.btn-eye:focus i {
+  color: #219150;
+}

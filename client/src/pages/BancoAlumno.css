@@ -1,0 +1,97 @@
+.gestion-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.gestion-card {
+  position: relative;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  min-width: 320px;
+  max-width: 350px;
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+.gestion-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-fecha {
+  font-size: 12px;
+  color: #888;
+}
+
+.empresa-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #eee;
+}
+
+.card-empresa-estudiantes {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-titulo {
+  margin: 12px 0 8px 0;
+  font-size: 20px;
+}
+
+.card-etiquetas {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.etiqueta {
+  border-radius: 12px;
+  padding: 2px 12px;
+  font-size: 12px;
+  color: #fff;
+  display: inline-block;
+}
+
+.tag-especialidad { background: #1976d2; }
+.tag-modalidad-presencial { background: #43a047; }
+.tag-modalidad-otro { background: #fbc02d; color: #222; }
+.tag-apoyo-si { background: #8e24aa; }
+.tag-apoyo-no { background: #bdbdbd; color: #222; }
+.tag-default { background: #90caf9; }
+
+.btn-detalles {
+  margin-top: 8px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-detalles:hover {
+  background: #1251a3;
+}
+
+.no-proyectos {
+  text-align: center;
+  color: #888;
+}

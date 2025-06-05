@@ -52,7 +52,7 @@ class UsuarioRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
-        fields = ['email', 'password', 'confirm_password', 'nombres', 'primer_apellido', 'segundo_apellido']
+        fields = ['email', 'password', 'confirm_password', 'nombres', 'primer_apellido', 'segundo_apellido', 'role']
         extra_kwargs = {
             'password': {'write_only': True},
         }
