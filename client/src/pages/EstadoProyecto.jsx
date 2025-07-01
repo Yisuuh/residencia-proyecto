@@ -1,5 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./EstadoProyecto.css";
+
+const camposProyecto = [
+  { key: "nombre_proyecto", label: "Nombre del Proyecto" },
+  { key: "nombre_responsable", label: "Responsable" },
+  { key: "correo", label: "Correo" },
+  { key: "telefono", label: "Teléfono" },
+  { key: "descripcion", label: "Descripción" },
+  { key: "nombre_empresa", label: "Empresa" },
+  { key: "nombre_institucion", label: "Institución" },
+  { key: "giro", label: "Área tecnológica" },
+  { key: "modalidad", label: "Modalidad" },
+  { key: "objetivo_general", label: "Objetivo General" },
+  { key: "objetivos_especificos", label: "Objetivos Específicos" },
+  { key: "actividades", label: "Actividades" },
+  { key: "productos", label: "Productos" },
+  { key: "recursos", label: "Recursos" },
+  { key: "fecha_inicio", label: "Fecha de Inicio" },
+  { key: "fecha_fin", label: "Fecha de Fin" },
+  // Agrega aquí más campos si tu modelo tiene más
+];
 
 const EstadoProyecto = () => {
   const [proyecto, setProyecto] = useState(null);
@@ -23,19 +44,21 @@ const EstadoProyecto = () => {
     fetchProyecto();
   }, []);
 
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <div className="estado-proyecto-container"><div className="proyecto-card">Cargando...</div></div>;
+  if (error) return <div className="estado-proyecto-container"><div className="proyecto-card error">{error}</div></div>;
 
   return (
     <div className="estado-proyecto-container">
       <h2>Mi Proyecto Aceptado</h2>
-      <div className="proyecto-detalles">
-        <p><strong>Nombre:</strong> {proyecto.nombre_proyecto}</p>
-        <p><strong>Responsable:</strong> {proyecto.nombre_responsable}</p>
-        <p><strong>Correo:</strong> {proyecto.correo}</p>
-        <p><strong>Teléfono:</strong> {proyecto.telefono}</p>
-        <p><strong>Descripción:</strong> {proyecto.descripcion}</p>
-        {/* Agrega más campos según tu modelo */}
+      <div className="proyecto-card">
+        {camposProyecto.map(({ key, label }) =>
+          proyecto[key] && (
+            <div className="proyecto-campo" key={key}>
+              <span className="proyecto-label">{label}:</span>
+              <span className="proyecto-valor">{proyecto[key]}</span>
+            </div>
+          )
+        )}
       </div>
     </div>
   );

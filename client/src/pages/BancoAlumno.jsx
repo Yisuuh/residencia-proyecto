@@ -84,70 +84,72 @@ const BancoAlumno = ({ user, menuItems }) => {
   };
 
   return (
-    <>
-      <div className="gestion-header">
-        <h2>Banco de Proyectos</h2>
-      </div>
-      <div className="gestion-cards-container">
-        {loading ? (
-          <p>Cargando proyectos...</p>
-        ) : proyectos.length === 0 ? (
-          <p className="no-proyectos">No hay proyectos registrados.</p>
-        ) : (
-          proyectos.map((proy) => (
-            <div className="gestion-card" key={proy.id}>
-              {/* Fecha y logo */}
-              <div className="card-header">
-                <span className="card-fecha">
-                  {proy.fecha_subida ? new Date(proy.fecha_subida).toLocaleDateString() : "Sin fecha"}
-                </span>
-                {proy.imagen && (
-                  <img
-                    src={proy.imagen}
-                    alt="Empresa"
-                    className="empresa-img"
-                  />
-                )}
+    <div className="banco-alumno-bg">
+      <div className="banco-alumno-main">
+        <div className="gestion-header">
+          <h2>Banco de Proyectos</h2>
+        </div>
+        <div className="gestion-cards-container">
+          {loading ? (
+            <p>Cargando proyectos...</p>
+          ) : proyectos.length === 0 ? (
+            <p className="no-proyectos">No hay proyectos registrados.</p>
+          ) : (
+            proyectos.map((proy) => (
+              <div className="gestion-card" key={proy.id}>
+                {/* Fecha y logo */}
+                <div className="card-header">
+                  <span className="card-fecha">
+                    {proy.fecha_subida ? new Date(proy.fecha_subida).toLocaleDateString() : "Sin fecha"}
+                  </span>
+                  {proy.imagen && (
+                    <img
+                      src={proy.imagen}
+                      alt="Empresa"
+                      className="empresa-img"
+                    />
+                  )}
+                </div>
+                {/* Empresa y estudiantes */}
+                <div className="card-empresa-estudiantes">
+                  <span><strong>{proy.nombre_empresa}</strong></span>
+                  <span>Estudiantes: <strong>{proy.numero_estudiantes || 1}</strong></span>
+                </div>
+                {/* Título */}
+                <h3 className="card-titulo">{proy.nombre_proyecto}</h3>
+                {/* Etiquetas */}
+                <div className="card-etiquetas">
+                  <span className={`etiqueta ${getTagColor("especialidad", proy.especialidad)}`}>
+                    {proy.especialidad}
+                  </span>
+                  <span className={`etiqueta ${getTagColor("modalidad", proy.modalidad)}`}>
+                    {proy.modalidad}
+                  </span>
+                  <span className={`etiqueta ${getTagColor("apoyo", proy.apoyo)}`}>
+                    {proy.apoyo ? "Con apoyo" : "Sin apoyo"}
+                  </span>
+                </div>
+                {/* Botón detalles */}
+                <button className="btn-detalles" onClick={() => handleDetalles(proy)}>
+                  Detalles
+                </button>
               </div>
-              {/* Empresa y estudiantes */}
-              <div className="card-empresa-estudiantes">
-                <span><strong>{proy.nombre_empresa}</strong></span>
-                <span>Estudiantes: <strong>{proy.numero_estudiantes || 1}</strong></span>
-              </div>
-              {/* Título */}
-              <h3 className="card-titulo">{proy.nombre_proyecto}</h3>
-              {/* Etiquetas */}
-              <div className="card-etiquetas">
-                <span className={`etiqueta ${getTagColor("especialidad", proy.especialidad)}`}>
-                  {proy.especialidad}
-                </span>
-                <span className={`etiqueta ${getTagColor("modalidad", proy.modalidad)}`}>
-                  {proy.modalidad}
-                </span>
-                <span className={`etiqueta ${getTagColor("apoyo", proy.apoyo)}`}>
-                  {proy.apoyo ? "Con apoyo" : "Sin apoyo"}
-                </span>
-              </div>
-              {/* Botón detalles */}
-              <button className="btn-detalles" onClick={() => handleDetalles(proy)}>
-                Detalles
-              </button>
-            </div>
-          ))
+            ))
+          )}
+        </div>
+        {showDetalles && proyectoSeleccionado && (
+          <GestionProyectosDetalles
+            proyecto={proyectoSeleccionado}
+            onClose={() => setShowDetalles(false)}
+            user={user}
+            aceptados={aceptados}
+            showDetalles={showDetalles}
+            proyectoSeleccionado={proyectoSeleccionado}
+            onAplicar={handleAplicar}
+          />
         )}
       </div>
-      {showDetalles && proyectoSeleccionado && (
-      <GestionProyectosDetalles
-        proyecto={proyectoSeleccionado}
-        onClose={() => setShowDetalles(false)}
-        user={user}
-        aceptados={aceptados}
-        showDetalles={showDetalles}
-        proyectoSeleccionado={proyectoSeleccionado}
-        onAplicar={handleAplicar}
-      />
-      )}
-    </>
+    </div>
   );
 };
 

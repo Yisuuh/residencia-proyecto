@@ -17,7 +17,7 @@ class DocumentoView(APIView):
         alumno_id = request.query_params.get("alumno_id")
         if alumno_id:
             # Solo permitir si el usuario es jefe o coordinador
-            if not request.user.rol in ["jefe_carrera", "coordinador", "admin"]:
+            if not request.user.role in ["jefe_carrera", "coordinador", "admin"]:
                 return Response({"error": "No tienes permiso para ver otros expedientes."}, status=403)
             try:
                 alumno = Usuario.objects.get(pk=alumno_id)

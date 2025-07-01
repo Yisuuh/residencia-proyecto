@@ -250,16 +250,23 @@ const ExpedienteAlumno = () => {
         <input
           type="file"
           id="modal-file-input"
+          style={{ display: "none" }}
           onChange={handleModalFileChange}
         />
         <label htmlFor="modal-file-input" className="modal-file-upload">
           Seleccionar Archivo
         </label>
         <div className="modal-actions">
-          <button onClick={handleModalUpload} disabled={!modalFile || uploading}>
+          <button
+            className="modal-btn modal-btn-primary"
+            onClick={handleModalUpload}
+            disabled={!modalFile || uploading}
+          >
             {uploading ? "Subiendo..." : "Subir"}
           </button>
-          <button onClick={closeModal}>Cancelar</button>
+          <button className="modal-btn modal-btn-cancel" onClick={closeModal}>
+            Cancelar
+          </button>
         </div>
       </Modal>
     </>

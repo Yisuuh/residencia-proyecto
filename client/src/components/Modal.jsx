@@ -1,16 +1,39 @@
-import React from "react";
-import "./Modal.css"; // Archivo CSS para los estilos del modal
+import React, { useEffect, useState } from "react";
+import "./Modal.css";
 
-const Modal = ({ isOpen, onClose, children, className = "" }) => {
-  if (!isOpen) return null; // Si el modal no está abierto, no renderiza nada
+const Modal = ({ isOpen, onClose, children }) => {
+  const [show, setShow] = useState(isOpen);
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) setShow(true);
+    else if (show) {
+      setClosing(true);
+      setTimeout(() => {
+        setShow(false);
+        setClosing(false);
+      }, 220); // Debe coincidir con la duración de modalPopOut
+    }
+  }, [isOpen]);
+
+  if (!show) return null;
+
+  const handleClose = () => {
+    setClosing(true);
+    setTimeout(() => {
+      setShow(false);
+      setClosing(false);
+      onClose();
+    }, 220);
+  };
 
   return (
-    <div className="modal-overlay">
-      <div className={`modal ${className}`}>
-        <button className="modal-close" onClick={onClose}>
-          &times;
+    <div className={`modal-overlay${closing ? " closing" : ""}`}>
+      <div className={`modal-content${closing ? " closing" : ""}`}>
+        <button className="modal-close" onClick={handleClose} aria-label="Cerrar">
+          <i className="ri-close-line"></i>
         </button>
-        <div className="modal-content">{children}</div>
+        {children}
       </div>
     </div>
   );

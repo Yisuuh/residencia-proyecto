@@ -19,6 +19,7 @@ import ResidentesEmpresa from "./pages/ResidentesEmpresa";
 import ResidentesAprobados from "./pages/ResidentesAprobados";
 import EstadoProyecto from "./pages/EstadoProyecto";
 import ExpedienteJefe from "./pages/ExpedienteJefe";
+import DashboardCoord from "./pages/DashboardCoord";
 
 const alumnoMenuItems = [
   { name: "Inicio", path: "/dashboard/alumno/", icon: "ri-home-line" },
@@ -44,6 +45,11 @@ const empresaMenuItems = [
     { name: "Residentes", path: "/dashboard/empresa/aprobados", icon: "ri-group-line" },
   ];
 
+const coordinadorMenuItems = [
+  { name: "Inicio", path: "/dashboard/coordinador/", icon: "ri-home-line" },
+  { name: "Expedientes", path: "/dashboard/coordinador/expedientes", icon: "ri-folder-line" },
+];
+
 const AppContent = ({ user, setUser }) => {
   const location = useLocation();
 
@@ -65,7 +71,15 @@ const AppContent = ({ user, setUser }) => {
           element={
             <ProtectedRoute>
               <Layout
-                menuItems={user.role === 'empresa' ? empresaMenuItems : user.role === 'alumno' ? alumnoMenuItems : jefeMenuItems}
+                menuItems={
+                  user.role === 'empresa'
+                    ? empresaMenuItems
+                    : user.role === 'alumno'
+                    ? alumnoMenuItems
+                    : user.role === 'coordinador'
+                    ? coordinadorMenuItems
+                    : jefeMenuItems
+                }
                 user={user}
               />
             </ProtectedRoute>
@@ -83,6 +97,8 @@ const AppContent = ({ user, setUser }) => {
           <Route path="jefe/usuarios" element={<GestionUsuarios />} />
           <Route path="jefe/banco" element={<BancoAlumno />} />
           <Route path="jefe/expedientes" element={<ExpedienteJefe />} />
+          <Route path="coordinador" element={<DashboardCoord />} />
+          <Route path="coordinador/expedientes" element={<ExpedienteJefe />} />
         </Route>
         <Route path="/visor-pdf" element={<VisorPDF />} />
       </Routes>

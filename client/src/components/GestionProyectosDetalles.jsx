@@ -146,6 +146,16 @@ const GestionProyectosDetalles = ({ proyecto, onClose, user, aceptados, onAplica
           <p>
             <strong>Teléfono:</strong> {proyecto.telefono}
           </p>
+          {proyecto.nombre_empresa && (
+            <p>
+              <strong>Nombre de la empresa:</strong> {proyecto.nombre_empresa}
+            </p>
+          )}
+          {proyecto.nombre_institucion && (
+            <p>
+              <strong>Nombre de la institución:</strong> {proyecto.nombre_institucion}
+            </p>
+          )}
           <p>
             <strong>Justificación:</strong> {proyecto.justificacion}
           </p>
@@ -153,55 +163,63 @@ const GestionProyectosDetalles = ({ proyecto, onClose, user, aceptados, onAplica
             <strong>Objetivo:</strong> {proyecto.objetivo}
           </p>
           <p>
-            <strong>Problema:</strong> {proyecto.problema}
+            <strong>Problema a resolver:</strong> {proyecto.problema}
           </p>
-          <p>
-            <strong>Actividades:</strong> {proyecto.actividades}
-          </p>
-          <p>
-            <strong>Stack tecnológico:</strong> {proyecto.stack}
-          </p>
-          <p>
-            <strong>Tipo de entidad:</strong> {proyecto.tipo_entidad}
-          </p>
-          <p>
-            <strong>RFC:</strong> {proyecto.rfc}
-          </p>
-          <p>
-            <strong>Giro:</strong> {proyecto.giro}
-          </p>
-          <p>
-            <strong>Página web:</strong> {proyecto.pagina_web}
-          </p>
-          <p>
-            <strong>Periodo:</strong> {proyecto.periodo}
-          </p>
-          <p>
-            <strong>Competencias:</strong> {proyecto.competencias}
-          </p>
-          <p>
-            <strong>Tipo de apoyo:</strong> {proyecto.tipo_apoyo}
-          </p>
-          <p>
-            <strong>¿Ya hay estudiante interesado?:</strong>{" "}
-            {proyecto.estudiante_interesado ? "Sí" : "No"}
-          </p>
-          <p>
-            <strong>Nombre del estudiante solicitado:</strong>{" "}
-            {proyecto.nombre_estudiante_solicitado}
-          </p>
-          <p>
-            <strong>¿Es Tec?:</strong> {proyecto.es_tec ? "Sí" : "No"}
-          </p>
-          <p>
-            <strong>¿Incluir asesor?:</strong> {proyecto.incluir_asesor ? "Sí" : "No"}
-          </p>
-          <p>
-            <strong>Nombre del asesor:</strong> {proyecto.nombre_asesor}
-          </p>
-          <p>
-            <strong>Observaciones:</strong> {proyecto.observaciones}
-          </p>
+          {proyecto.tipo_entidad_display && (
+            <p>
+              <strong>Tipo de entidad:</strong> {proyecto.tipo_entidad_display}
+            </p>
+          )}
+          {proyecto.giro_display && (
+            <p>
+              <strong>Área tecnológica:</strong> {proyecto.giro_display}
+            </p>
+          )}
+          {proyecto.periodo_display && (
+            <p>
+              <strong>Periodo:</strong> {proyecto.periodo_display}
+            </p>
+          )}
+          {proyecto.modalidad_display && (
+            <p>
+              <strong>Modalidad:</strong> {proyecto.modalidad_display}
+            </p>
+          )}
+          {proyecto.es_tec_display && (
+            <p>
+              <strong>¿Se trata del Instituto Tecnológico de Mérida?:</strong> {proyecto.es_tec_display}
+            </p>
+          )}
+          {proyecto.apoyo_display && (
+            <p>
+              <strong>¿Existe algún tipo de apoyo para el alumno?:</strong> {proyecto.apoyo_display}
+            </p>
+          )}
+          {proyecto.tipo_apoyo && (
+            <p>
+              <strong>¿Qué tipo de apoyo?:</strong> {proyecto.tipo_apoyo}
+            </p>
+          )}
+          {proyecto.estudiante_interesado === "si" && (
+            <p>
+              <strong>¿Existe algún estudiante interesado?:</strong> Sí
+            </p>
+          )}
+          {proyecto.estudiante_interesado === "no" && (
+            <p>
+              <strong>¿Existe algún estudiante interesado?:</strong> No
+            </p>
+          )}
+          {proyecto.nombre_estudiante_solicitado && (
+            <p>
+              <strong>Nombre del estudiante solicitado:</strong> {proyecto.nombre_estudiante_solicitado}
+            </p>
+          )}
+          {proyecto.observaciones && (
+            <p>
+              <strong>Observaciones:</strong> {proyecto.observaciones}
+            </p>
+          )}
         </div>
       </div>
     </div>

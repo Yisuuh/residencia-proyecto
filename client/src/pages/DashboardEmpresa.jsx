@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "./DashboardEmpresa.css";
 
 const DashboardEmpresa = () => {
   const [user, setUser] = useState({ name: "", email: "", photo: "" });
@@ -27,15 +29,30 @@ const DashboardEmpresa = () => {
   const menuItems = [
     { name: "Inicio", path: "/dashboard/empresa/", icon: "ri-home-line" },
     { name: "Gestión de Proyectos", path: "/dashboard/empresa/gestion-proyectos", icon: "ri-briefcase-4-line" },
-    { name: "Residentes", path: "/dashboard/empresa/residentes", icon: "ri-group-line" },
+    { name: "Residentes", path: "/dashboard/empresa/aprobados", icon: "ri-group-line" },
   ];
 
   return (
-    <>
-      <h1>Bienvenido, {user.name}</h1>
-      <p>Tu correo electrónico es: {user.email}</p>
-      <p>Selecciona una opción del menú para continuar.</p>
-    </>
+    <div className="dashboard-empresa-bg">
+      <div className="dashboard-empresa-main">
+        <img
+          src={user.photo || "/default-user.png"}
+          alt="Foto de empresa"
+          className="dashboard-empresa-avatar"
+        />
+        <h1>Bienvenido, {user.name}</h1>
+        <p>Tu correo electrónico es: <b>{user.email}</b></p>
+        <p>Selecciona una opción del menú para continuar.</p>
+        <div className="dashboard-empresa-menu">
+          {menuItems.map(item => (
+            <Link key={item.path} to={item.path} className="dashboard-empresa-menu-item">
+              <i className={item.icon} style={{ fontSize: "1.3rem" }}></i>
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

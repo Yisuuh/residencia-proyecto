@@ -1,0 +1,68 @@
+.estado-proyecto-container {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  padding: 0 12px;
+}
+
+h2 {
+  color: #6750A4;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.proyecto-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(103,80,164,0.10);
+  padding: 32px 28px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.4s;
+}
+
+.proyecto-card.error {
+  color: #e53935;
+  background: #fff0f0;
+  border: 1px solid #e53935;
+  text-align: center;
+}
+
+.proyecto-campo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 1.08rem;
+  border-bottom: 1px solid #f2f0fa;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.proyecto-campo:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.proyecto-label {
+  color: #6750A4;
+  font-weight: 600;
+  min-width: 140px;
+  display: inline-block;
+}
+
+.proyecto-valor {
+  color: #3a2e5c;
+  font-weight: 400;
+  flex: 1;
+  word-break: break-word;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to   { opacity: 1; transform: translateY(0);}
+}

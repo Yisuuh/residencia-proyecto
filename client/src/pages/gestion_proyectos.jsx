@@ -14,25 +14,20 @@ const initialForm = {
   objetivo: "",
   justificacion: "",
   problema: "",
-  actividades: "",
-  stack: "",
-  modalidad: "virtual",
-  tipo_entidad: "empresa",
+  modalidad: "", // <--- antes "virtual"
+  tipo_entidad: "", // <--- antes "empresa"
   nombre_empresa: "",
+  nombre_institucion: "",
   rfc: "",
-  giro: "servicios",
+  giro: "",
   pagina_web: "",
   numero_estudiantes: "",
-  especialidad: "ciberseguridad",
-  periodo: "enero-junio",
-  competencias: "",
-  apoyo: false,
+  periodo: "",
+  apoyo: "", // <--- antes false
   tipo_apoyo: "",
-  estudiante_interesado: false,
+  estudiante_interesado: "", // <--- antes false
   nombre_estudiante_solicitado: "",
-  es_tec: false,
-  incluir_asesor: false,
-  nombre_asesor: "",
+  es_tec: "", // <--- antes false
   observaciones: "",
   imagen: null,
 };
@@ -82,7 +77,7 @@ const GestionProyectos = ({ user }) => {
       name === "es_tec" ||
       name === "incluir_asesor"
     ) {
-      setForm({ ...form, [name]: value === true || value === "si" });
+      setForm({ ...form, [name]: value }); // <-- Guarda el string tal cual
     } else {
       setForm({ ...form, [name]: value });
     }

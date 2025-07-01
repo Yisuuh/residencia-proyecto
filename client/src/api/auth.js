@@ -34,6 +34,10 @@ export const getDashboardRoute = (role) => {
       return "/dashboard/empresa/";
     case "jefe_carrera":
       return "/dashboard/jefe/";
+    case "coordinador":
+      return "/dashboard/coordinador/";
+    case "academia":
+      return "/dashboard/academia/";
     // Agrega más roles si los tienes
     default:
       return "/";

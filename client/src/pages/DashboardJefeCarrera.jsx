@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../components/Layout";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "./DashboardJefe.css";
 
 const menuItems = [
   { name: "Inicio", path: "/dashboard/jefe/", icon: "ri-home-line" },
@@ -14,6 +15,13 @@ const menuItems = [
 
 const DashboardJefeCarrera = () => {
   const [user, setUser] = useState({ name: "", email: "", photo: "" });
+
+  // Ejemplo de widgets (puedes reemplazar por datos reales)
+  const widgets = [
+    { title: "Usuarios", value: 12 },
+    { title: "Proyectos", value: 8 },
+    { title: "Expedientes", value: 24 },
+  ];
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -34,12 +42,34 @@ const DashboardJefeCarrera = () => {
   }, []);
 
   return (
-    <>
-      <h1>Bienvenido, {user.nombres || user.name}</h1>
-      <p>Tu correo electrónico es: {user.email}</p>
-      <p>Selecciona una opción del menú para continuar.</p>
-      {/* Aquí puedes agregar widgets, estadísticas o accesos rápidos para el jefe de carrera */}
-    </>
+    <div className="dashboard-jefe-bg">
+      <div className="dashboard-jefe-main">
+        <img
+          src={user.photo || "/default-user.png"}
+          alt="Foto de perfil"
+          className="dashboard-jefe-avatar"
+        />
+        <h1>Bienvenido, {user.nombres || user.name}</h1>
+        <p>Tu correo electrónico es: <b>{user.email}</b></p>
+        <p>Selecciona una opción del menú para continuar.</p>
+        <div className="dashboard-jefe-menu">
+          {menuItems.map(item => (
+            <Link key={item.path} to={item.path} className="dashboard-jefe-menu-item">
+              <i className={item.icon} style={{ fontSize: "1.3rem" }}></i>
+              {item.name}
+            </Link>
+          ))}
+        </div>
+        <div className="dashboard-jefe-widgets">
+          {widgets.map(w => (
+            <div className="dashboard-jefe-widget" key={w.title}>
+              <div className="dashboard-jefe-widget-title">{w.title}</div>
+              <div className="dashboard-jefe-widget-value">{w.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

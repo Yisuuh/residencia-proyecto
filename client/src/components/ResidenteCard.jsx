@@ -9,13 +9,17 @@ const ResidenteCard = ({ aplicacion, onVerMas, hideActions }) => (
       className="residente-img"
     />
     <div className="residente-info">
-      <h4>{aplicacion.alumno.nombre}</h4>
+      <h4>
+        {`${aplicacion.alumno.nombres} ${aplicacion.alumno.primer_apellido} ${aplicacion.alumno.segundo_apellido}`}
+      </h4>
       <p><strong>Correo:</strong> {aplicacion.alumno.email}</p>
       <p><strong>Especialidad:</strong> {aplicacion.alumno.especialidad || "N/A"}</p>
       <p><strong>Contacto:</strong> {aplicacion.alumno.telefono || "N/A"}</p>
-      <button className="btn-ver-mas" onClick={() => onVerMas(aplicacion)}>
-        Ver más
-      </button>
+      {typeof onVerMas === "function" && (
+        <button className="btn-ver-mas" onClick={() => onVerMas(aplicacion)}>
+          Ver más
+        </button>
+      )}
     </div>
     {!hideActions && (
       <div className="acciones-residente">
