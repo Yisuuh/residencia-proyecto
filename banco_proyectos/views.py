@@ -14,7 +14,8 @@ class AplicarProyectoView(APIView):
         proyecto = get_object_or_404(FormularioProyecto, id=proyecto_id)
         # Evitar aplicar dos veces
         if AplicacionProyecto.objects.filter(alumno=request.user, proyecto=proyecto).exists():
-            return Response({"detail": "Ya aplicaste a este proyecto."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Ya has aplicado a este proyecto"}, status=status.HTTP_400_BAD_REQUEST)
+        
         aplicacion = AplicacionProyecto.objects.create(alumno=request.user, proyecto=proyecto)
         serializer = AplicacionProyectoSerializer(aplicacion)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -31,7 +32,7 @@ class AplicacionesPorProyectoView(generics.ListAPIView):
 # c) PATCH /api/aplicacion/<id>/
 class ActualizarEstadoAplicacionView(APIView):
     permission_classes = [permissions.IsAuthenticated]
-
+    
     def patch(self, request, pk):
         aplicacion = get_object_or_404(AplicacionProyecto, pk=pk)
         nuevo_estado = request.data.get("estado")
@@ -65,7 +66,7 @@ class AplicacionesPorEmpresaView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        empresa = request.user  # o request.user.empresa si tienes relación
+        empresa = request.user
         aplicaciones = AplicacionProyecto.objects.filter(
             proyecto__empresa=empresa,
             estado="pendiente"
@@ -82,20 +83,6 @@ class ResidentesAprobadosEmpresaView(APIView):
         aplicaciones = AplicacionProyecto.objects.filter(
             proyecto__empresa=empresa,
             estado="aceptado"
-        )
+        ).select_related('proyecto', 'alumno')
         serializer = AplicacionProyectoSerializer(aplicaciones, many=True)
-        return Response(serializer.data)
-
-# Nuevo endpoint sugerido
-class ProyectoAceptadoAlumnoView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get(self, request):
-        aplicacion = AplicacionProyecto.objects.filter(
-            alumno=request.user,
-            estado="aceptado"
-        ).select_related('proyecto').first()
-        if not aplicacion:
-            return Response({"detail": "No tienes un proyecto aceptado."}, status=404)
-        serializer = FormularioProyectoSerializer(aplicacion.proyecto)
         return Response(serializer.data)
