@@ -1,68 +1,245 @@
 .estado-proyecto-container {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
   max-width: 600px;
   margin: 40px auto 0 auto;
   padding: 0 12px;
 }
 
-h2 {
-  color: #6750A4;
-  font-size: 1.7rem;
+/* ✅ CAMBIO: Agregar .estado-proyecto-container antes de h2 */
+.estado-proyecto-container h2 {
+  max-width: 1000px;
+  margin: 0 auto 32px auto;
+  color: #7E122A !important;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 24px;
   text-align: center;
   letter-spacing: 0.01em;
-}
-
-.proyecto-card {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(103,80,164,0.10);
-  padding: 32px 28px 24px 28px;
+  font-family: 'Poppins', sans-serif !important;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   animation: fadeIn 0.4s;
 }
 
-.proyecto-card.error {
-  color: #e53935;
-  background: #fff0f0;
-  border: 1px solid #e53935;
-  text-align: center;
+.estado-proyecto-container h2::before {
+  content: '\eb88';
+  font-family: 'RemixIcon';
+  font-size: 28px;
+  color: #7E122A;
 }
 
-.proyecto-campo {
+/* ✅ CAMBIO: Agregar .estado-proyecto-container antes de .proyecto-card */
+.estado-proyecto-container .proyecto-card {
+  max-width: 1000px;
+  margin: 0 auto 24px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(126, 18, 42, 0.10);
+  padding: 32px 28px;
+  animation: fadeIn 0.4s;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.estado-proyecto-container .proyecto-card:hover {
+  box-shadow: 0 8px 40px rgba(126, 18, 42, 0.15);
+  border-color: #7E122A;
+  transform: translateY(-3px);
+}
+
+/* ✅ CAMBIO: Agregar .estado-proyecto-container antes de h3 */
+.estado-proyecto-container .proyecto-card h3 {
+  color: #7E122A !important;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  font-family: 'Poppins', sans-serif !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.estado-proyecto-container .proyecto-card h3::before {
+  font-family: 'RemixIcon';
+  font-size: 24px;
+  color: #7E122A;
+}
+
+.estado-proyecto-container .proyecto-card:nth-child(2) h3::before {
+  content: '\f007';
+}
+
+.estado-proyecto-container .proyecto-card:nth-child(3) h3::before {
+  content: '\eb88';
+}
+
+.estado-proyecto-container .proyecto-card.error {
+  color: #dc3545 !important;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+  border: 2px solid #dc3545 !important;
+  text-align: center;
+  box-shadow: 0 6px 32px rgba(220, 53, 69, 0.10);
+}
+
+.estado-proyecto-container .proyecto-card.error:hover {
+  box-shadow: 0 8px 40px rgba(220, 53, 69, 0.15);
+  border-color: #dc3545 !important;
+}
+
+.estado-proyecto-container .proyecto-campo {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 16px;
   align-items: flex-start;
-  font-size: 1.08rem;
-  border-bottom: 1px solid #f2f0fa;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  font-family: 'Poppins', sans-serif !important;
 }
 
-.proyecto-campo:last-child {
+.estado-proyecto-container .proyecto-campo:last-child {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
 
-.proyecto-label {
-  color: #6750A4;
+.estado-proyecto-container .proyecto-label {
+  color: #7E122A !important;
   font-weight: 600;
-  min-width: 140px;
+  min-width: 160px;
   display: inline-block;
+  font-family: 'Poppins', sans-serif !important;
 }
 
-.proyecto-valor {
-  color: #3a2e5c;
-  font-weight: 400;
+.estado-proyecto-container .proyecto-valor {
+  color: #333333 !important;
+  font-weight: 500;
   flex: 1;
   word-break: break-word;
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+/* ✅ Estado especial (verde para aceptado) */
+.estado-proyecto-container .proyecto-valor[style*="color: green"] {
+  color: #28a745 !important;
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ✅ Loading state */
+.estado-proyecto-container .proyecto-card:has(.loading) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  font-size: 1.2rem;
+  color: #7E122A;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px);}
-  to   { opacity: 1; transform: translateY(0);}
+  from { 
+    opacity: 0; 
+    transform: translateY(20px);
+  }
+  to   { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Responsive mejorado */
+@media (max-width: 768px) {
+  .estado-proyecto-container {
+    padding: 16px;
+  }
+  
+  .estado-proyecto-container h2 {
+    font-size: 1.7rem;
+    margin-bottom: 24px;
+  }
+  
+  .estado-proyecto-container .proyecto-card {
+    padding: 24px 20px;
+  }
+  
+  .estado-proyecto-container .proyecto-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .estado-proyecto-container .proyecto-campo {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 1rem;
+  }
+  
+  .estado-proyecto-container .proyecto-label {
+    min-width: 0;
+    font-weight: 700;
+  }
+  
+  .estado-proyecto-container .proyecto-valor {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .estado-proyecto-container {
+    padding: 12px;
+  }
+  
+  .estado-proyecto-container h2 {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .estado-proyecto-container h2::before {
+    font-size: 24px;
+  }
+  
+  .estado-proyecto-container .proyecto-card {
+    padding: 20px 16px;
+  }
+  
+  .estado-proyecto-container .proyecto-card h3 {
+    font-size: 1.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .estado-proyecto-container .proyecto-campo {
+    gap: 6px;
+    font-size: 0.95rem;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .estado-proyecto-container .proyecto-label {
+    font-size: 0.9rem;
+  }
+  
+  .estado-proyecto-container .proyecto-valor {
+    font-size: 0.9rem;
+  }
+  
+  .estado-proyecto-container .proyecto-valor[style*="color: green"] {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
 }

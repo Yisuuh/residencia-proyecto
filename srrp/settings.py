@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'users',
     'expediente',
-    'banco_proyectos'
+    'banco_proyectos',
+    'configuracion',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'users.middleware.RoleBasedAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'srrp.urls'

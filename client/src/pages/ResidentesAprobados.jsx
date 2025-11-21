@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ResidenteCard from "../components/ResidenteCard";
 import ResidenteCardVerMas from "../components/ResidenteCardVerMas";
+import "./ResidenteSolicitudesyAprobado.css"; // ✅ Agregar esta línea
 
 const ResidentesAprobados = ({ user }) => {
   const [aprobados, setAprobados] = useState([]);

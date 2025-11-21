@@ -1,0 +1,465 @@
+/* ✅ Tarjeta de residente rediseñada */
+.residente-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 2px solid #f8f9fa;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ✅ Borde superior animado */
+.residente-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7E122A 0%, #a31d36 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.residente-card:hover::before {
+  transform: scaleX(1);
+}
+
+.residente-card:hover {
+  box-shadow: 0 8px 25px rgba(126, 18, 42, 0.15);
+  transform: translateY(-3px);
+  border-color: #7E122A;
+}
+
+/* ✅ Estado de error */
+.residente-card.error {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+  border: 2px solid #dc3545;
+  color: #721c24;
+  text-align: center;
+  padding: 30px;
+}
+
+.residente-card.error p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+.residente-card.error::before {
+  content: '\f071';
+  font-family: 'RemixIcon';
+  font-size: 48px;
+  color: #dc3545;
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* ✅ Header de la tarjeta (imagen + nombre) */
+.residente-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #f8f9fa;
+}
+
+/* ✅ Imagen del residente mejorada */
+.residente-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e9ecef;
+  background: #f8f9fa;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.residente-card:hover .residente-img {
+  border-color: #7E122A;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(126, 18, 42, 0.3);
+}
+
+/* ✅ Información del residente mejorada */
+.residente-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.residente-info h4 {
+  margin: 0 0 12px 0;
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.3;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.residente-info h4::before {
+  content: '\f007';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 20px;
+}
+
+.residente-info p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #495057;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.residente-info p:hover {
+  background: #e9ecef;
+  border-left-color: #7E122A;
+  transform: translateX(3px);
+}
+
+.residente-info p strong {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 90px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ✅ Íconos para cada campo */
+.residente-info p:nth-child(2) strong::before { /* Email */
+  content: '\f199';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 14px;
+}
+
+.residente-info p:nth-child(3) strong::before { /* Teléfono */
+  content: '\f1ac';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 14px;
+}
+
+.residente-info p:nth-child(4) strong::before { /* Especialidad */
+  content: '\f19d';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 14px;
+}
+
+.residente-info p:nth-child(5) strong::before { /* Proyecto */
+  content: '\f2b3';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 14px;
+}
+
+.residente-info p:nth-child(6) strong::before { /* Estado */
+  content: '\f254';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 14px;
+}
+
+/* ✅ Estados con badges mejorados */
+.estado-pendiente {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+  color: #856404;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(255, 193, 7, 0.3);
+}
+
+.estado-pendiente::before {
+  content: '\f251';
+  font-family: 'RemixIcon';
+  font-size: 14px;
+}
+
+.estado-aceptado {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+}
+
+.estado-aceptado::before {
+  content: '\eb7a';
+  font-family: 'RemixIcon';
+  font-size: 14px;
+}
+
+.estado-rechazado {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+}
+
+.estado-rechazado::before {
+  content: '\eb79';
+  font-family: 'RemixIcon';
+  font-size: 14px;
+}
+
+/* ✅ Acciones mejoradas */
+.residente-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 2px solid #f8f9fa;
+}
+
+/* ✅ Botones con mismo estilo del sistema */
+.btn-ver-mas,
+.btn-aceptar,
+.btn-rechazar {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ✅ Botón Ver más - ROJO */
+.btn-ver-mas {
+  background: linear-gradient(135deg, #7E122A, #a31d36);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(126, 18, 42, 0.3);
+}
+
+.btn-ver-mas::before {
+  content: '\f06e';
+  font-family: 'RemixIcon';
+  font-size: 16px;
+}
+
+.btn-ver-mas:hover {
+  background: linear-gradient(135deg, #5d0e1f, #7a1529);
+  box-shadow: 0 6px 20px rgba(126, 18, 42, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ✅ Botón Aceptar - VERDE */
+.btn-aceptar {
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+}
+
+.btn-aceptar::before {
+  content: '\eb7a';
+  font-family: 'RemixIcon';
+  font-size: 16px;
+}
+
+.btn-aceptar:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ✅ Botón Rechazar - ROJO OSCURO */
+.btn-rechazar {
+  background: linear-gradient(135deg, #dc3545, #e85d75);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+}
+
+.btn-rechazar::before {
+  content: '\eb79';
+  font-family: 'RemixIcon';
+  font-size: 16px;
+}
+
+.btn-rechazar:hover {
+  background: linear-gradient(135deg, #c82333, #dc3545);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ✅ Estado activo para todos los botones */
+.btn-ver-mas:active,
+.btn-aceptar:active,
+.btn-rechazar:active {
+  transform: translateY(0);
+}
+
+/* ✅ Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.residente-card {
+  animation: fadeInUp 0.5s ease-out backwards;
+}
+
+/* ✅ Animación escalonada */
+.residente-card:nth-child(1) { animation-delay: 0.05s; }
+.residente-card:nth-child(2) { animation-delay: 0.1s; }
+.residente-card:nth-child(3) { animation-delay: 0.15s; }
+.residente-card:nth-child(4) { animation-delay: 0.2s; }
+.residente-card:nth-child(5) { animation-delay: 0.25s; }
+.residente-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .residente-card {
+    padding: 20px;
+  }
+  
+  .residente-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .residente-img {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .residente-info h4 {
+    font-size: 18px;
+    justify-content: center;
+  }
+  
+  .residente-info p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px;
+  }
+  
+  .residente-info p strong {
+    min-width: auto;
+  }
+  
+  .residente-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-ver-mas,
+  .btn-aceptar,
+  .btn-rechazar {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .residente-card {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .residente-img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .residente-info h4 {
+    font-size: 16px;
+  }
+  
+  .residente-info h4::before {
+    font-size: 18px;
+  }
+  
+  .residente-info p {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  
+  .residente-info p strong {
+    font-size: 11px;
+  }
+  
+  .residente-actions {
+    gap: 8px;
+    padding-top: 16px;
+  }
+  
+  .btn-ver-mas,
+  .btn-aceptar,
+  .btn-rechazar {
+    padding: 10px 16px;
+    font-size: 12px;
+    min-width: 100px;
+  }
+  
+  .btn-ver-mas::before,
+  .btn-aceptar::before,
+  .btn-rechazar::before {
+    font-size: 14px;
+  }
+}

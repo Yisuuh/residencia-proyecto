@@ -96,8 +96,8 @@ const ExpedienteAlumno = () => {
   };
 
   // Combinar documentos predefinidos con los documentos del alumno
-  const documentos = documentosPredefinidos.map((predefinido) => {
-    const documentoAlumno = documentosAlumno.find(
+  const documentos = (documentosPredefinidos || []).map((predefinido) => {
+    const documentoAlumno = (documentosAlumno || []).find(
       (doc) => doc.documento_predefinido.id === predefinido.id
     );
     return {
@@ -116,8 +116,8 @@ const ExpedienteAlumno = () => {
   });
 
   // Cálculo del porcentaje de avance
-  const totalDocs = documentosPredefinidos.length;
-  const aprobados = documentosAlumno.filter(
+  const totalDocs = documentosPredefinidos?.length || 0;
+  const aprobados = (documentosAlumno || []).filter(
     (doc) => doc.estado === "aprobado"
   ).length;
   const porcentaje = totalDocs > 0 ? Math.round((aprobados / totalDocs) * 100) : 0;
@@ -127,10 +127,10 @@ const ExpedienteAlumno = () => {
       <div className="expediente-container">
         <h1 className="expediente-title">Expediente del Alumno</h1>
         {/* NUEVO: Info del proyecto */}
-        {proyecto && (
+        {proyecto && proyecto.proyecto && (
           <div className="expediente-proyecto-info">
-            <strong>Proyecto asignado:</strong> {proyecto.nombre_proyecto} <br />
-            <strong>Responsable:</strong> {proyecto.nombre_responsable}
+            <strong>Proyecto asignado:</strong> {proyecto.proyecto.nombre_proyecto} <br />
+            <strong>Responsable:</strong> {proyecto.proyecto.nombre_responsable}
           </div>
         )}
         {/* NUEVO: Porcentaje de avance */}
@@ -163,7 +163,7 @@ const ExpedienteAlumno = () => {
           <tbody>
             {documentos.map((doc, index) => (
               <tr key={doc.id || index}>
-                <td>{doc.id}</td>
+                <td>{index + 1}</td>
                 <td>{doc.nombre}</td>
                 <td className={`estado ${doc.estado.toLowerCase()}`}>
                   {doc.estado.toLowerCase() === "aprobado" && (

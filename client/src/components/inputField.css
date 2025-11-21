@@ -10,13 +10,20 @@
   background-color: transparent;
   padding: 10px;
   border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.input-container:focus-within {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
 .input-icon {
-  color: white; /* Cambia el color del ícono */
+  color: white;
   margin-right: 8px;
   display: flex;
   align-items: center;
+  font-size: 16px;
 }
 
 .input-container input {
@@ -30,5 +37,52 @@
 }
 
 .input-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input-container .input-select {
+  flex: 1;
+  border: none;
+  background: transparent;
   color: white;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  appearance: none;
+  
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 8px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  padding-right: 28px;
+}
+
+.input-container .input-select option {
+  background: #333;
+  color: white;
+  padding: 8px;
+}
+
+/* ✅ REMOVER ESTO - Que se maneje desde register.css */
+/* .input-field.error .input-container {
+  border: 2px solid #dc2626 !important;
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.4) !important;
+  background: rgba(139, 0, 0, 0.1) !important;
+} */
+
+@media (max-width: 480px) {
+  .input-container input,
+  .input-container .input-select {
+    font-size: 11px;
+  }
+  
+  .input-icon {
+    font-size: 14px;
+  }
+  
+  .input-container .input-select {
+    background-size: 12px;
+    padding-right: 24px;
+  }
 }

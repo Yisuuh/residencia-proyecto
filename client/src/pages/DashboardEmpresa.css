@@ -1,5 +1,5 @@
 .dashboard-empresa-bg {
-  background: linear-gradient(120deg, #f7f6fb 60%, #e9e3f7 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* ✅ Gris del sistema */
   min-height: 100vh;
   width: 100%;
   padding: 0;
@@ -11,7 +11,7 @@
   padding: 36px 24px 28px 24px;
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 6px 32px rgba(103,80,164,0.10);
+  box-shadow: 0 6px 32px rgba(126, 18, 42, 0.10); /* ✅ Sombra vino */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,26 +23,28 @@
   height: 82px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #6750A4;
+  border: 3px solid #7E122A; /* ✅ Borde vino */
   background: #fff;
-  box-shadow: 0 2px 8px rgba(103,80,164,0.10);
+  box-shadow: 0 2px 8px rgba(126, 18, 42, 0.10); /* ✅ Sombra vino */
   margin-bottom: 18px;
 }
 
 .dashboard-empresa-main h1 {
-  color: #3a2e5c;
+  color: #333333 !important; /* ✅ Negro del sistema */
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 8px;
   text-align: center;
   letter-spacing: 0.01em;
+  font-family: 'Poppins', sans-serif !important; /* ✅ Fuente del sistema */
 }
 
 .dashboard-empresa-main p {
-  color: #6750A4;
+  color: #6c757d !important; /* ✅ Gris del sistema */
   font-size: 1.08rem;
   margin-bottom: 8px;
   text-align: center;
+  font-family: 'Poppins', sans-serif !important; /* ✅ Fuente del sistema */
 }
 
 .dashboard-empresa-menu {
@@ -56,23 +58,97 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  background: #f7f6fb;
+  background: #f8f9fa; /* ✅ Fondo gris claro */
   border-radius: 10px;
   padding: 10px 18px;
-  color: #6750A4;
+  color: #495057 !important; /* ✅ Texto gris oscuro */
   font-weight: 500;
   font-size: 1.05rem;
   text-decoration: none;
-  box-shadow: 0 1px 6px rgba(103,80,164,0.07);
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 1px 6px rgba(126, 18, 42, 0.07); /* ✅ Sombra vino */
+  transition: all 0.3s ease; /* ✅ Transición mejorada */
+  border: 2px solid transparent; /* ✅ Preparar para hover */
+  font-family: 'Poppins', sans-serif !important; /* ✅ Fuente del sistema */
 }
+
 .dashboard-empresa-menu-item:hover {
-  background: #e9e3f7;
-  color: #3a2e5c;
-  box-shadow: 0 4px 16px rgba(103,80,164,0.13);
+  background: #ffffff; /* ✅ Fondo blanco en hover */
+  color: #7E122A !important; /* ✅ Texto vino en hover */
+  box-shadow: 0 4px 16px rgba(126, 18, 42, 0.15); /* ✅ Sombra vino más fuerte */
+  border-color: #7E122A; /* ✅ Borde vino en hover */
+  transform: translateY(-2px); /* ✅ Efecto lift */
+}
+
+/* ✅ Agregar íconos a los elementos del menú */
+.dashboard-empresa-menu-item::before {
+  font-family: 'RemixIcon';
+  font-size: 18px;
+  color: currentColor;
+}
+
+/* ✅ Si tienes íconos específicos para cada elemento */
+.dashboard-empresa-menu-item:nth-child(1)::before {
+  content: '\f2b3'; /* Ícono de proyectos */
+}
+
+.dashboard-empresa-menu-item:nth-child(2)::before {
+  content: '\f007'; /* Ícono de usuarios */
+}
+
+.dashboard-empresa-menu-item:nth-child(3)::before {
+  content: '\f1c9'; /* Ícono de configuración */
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px);}
-  to   { opacity: 1; transform: translateY(0);}
+  from { 
+    opacity: 0; 
+    transform: translateY(30px);
+  }
+  to {   
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Responsive mejorado */
+@media (max-width: 768px) {
+  .dashboard-empresa-main {
+    margin: 20px auto 0 auto;
+    padding: 30px 20px 24px 20px;
+    max-width: 90%;
+  }
+  
+  .dashboard-empresa-menu {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .dashboard-empresa-menu-item {
+    justify-content: center;
+    padding: 12px 20px;
+  }
+  
+  .dashboard-empresa-main h1 {
+    font-size: 1.8rem;
+  }
+  
+  .dashboard-empresa-main p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-empresa-avatar {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .dashboard-empresa-main h1 {
+    font-size: 1.6rem;
+  }
+  
+  .dashboard-empresa-menu-item {
+    font-size: 1rem;
+  }
 }

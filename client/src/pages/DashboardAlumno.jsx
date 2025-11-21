@@ -37,6 +37,7 @@ const DashboardAlumno = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setProyecto(proyectoRes.data);
+        console.log("🔍 PROYECTO RECIBIDO:", proyectoRes.data);  // ✅ AGREGAR ESTO
 
         // Documentos predefinidos
         const predefinidosResponse = await axios.get(
@@ -53,8 +54,8 @@ const DashboardAlumno = () => {
         const documentosAlumno = alumnoResponse.data;
 
         // Calcular porcentaje de avance
-        const totalDocs = documentosPredefinidos.length;
-        const aprobados = documentosAlumno.filter(
+        const totalDocs = documentosPredefinidos?.length || 0;
+        const aprobados = (documentosAlumno || []).filter(
           (doc) => doc.estado === "aprobado"
         ).length;
         const porcentajeAvance = totalDocs > 0 ? Math.round((aprobados / totalDocs) * 100) : 0;
@@ -100,6 +101,8 @@ const DashboardAlumno = () => {
     { name: "Expediente", path: "/dashboard/alumno/expediente", icon: "ri-folder-line" },
   ];
 
+  console.log("🔍 PROYECTO EN RENDER:", proyecto);  // ✅ AGREGAR ESTO
+
   return (
     <div className="dashboard-alumno-container">
       <div className="dashboard-alumno-header">
@@ -118,10 +121,10 @@ const DashboardAlumno = () => {
         <div className="dashboard-alumno-widget">
           <div className="dashboard-alumno-widget-title">Proyecto asignado</div>
           <div className="dashboard-alumno-widget-value dashboard-alumno-proyecto-nombre">
-            {proyecto
-              ? (proyecto.nombre_proyecto.length > 38
-                  ? proyecto.nombre_proyecto.slice(0, 38) + "..."
-                  : proyecto.nombre_proyecto)
+            {proyecto && proyecto.proyecto && proyecto.proyecto.nombre_proyecto
+              ? (proyecto.proyecto.nombre_proyecto.length > 38
+                  ? proyecto.proyecto.nombre_proyecto.slice(0, 38) + "..."
+                  : proyecto.proyecto.nombre_proyecto)
               : "Sin proyecto"}
           </div>
         </div>

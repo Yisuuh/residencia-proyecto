@@ -17,10 +17,11 @@ export const login = async (email, password) => {
 export const register = async (formData) => {
   try {
     const response = await axios.post(`${API_URL}/register/`, formData);
-    // Guarda el token en localStorage
     localStorage.setItem("access_token", response.data.access);
     localStorage.setItem("refresh_token", response.data.refresh);
-    return response.data;
+    
+    // ✅ Asegúrate de que retornes toda la respuesta, incluyendo el rol
+    return response.data; // Debe incluir { access, refresh, role, user, etc. }
   } catch (error) {
     throw error.response ? error.response.data : new Error("Error de conexión");
   }

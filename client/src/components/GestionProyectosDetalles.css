@@ -1,0 +1,581 @@
+/* ✅ Modal de detalles con diseño del sistema */
+.modal-detalles-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+  overflow: hidden; /* ✅ CAMBIO: Ocultar overflow del navegador */
+}
+
+.modal-detalles-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 900px; /* ✅ CAMBIO: Más ancho */
+  width: 100%;
+  max-height: 90vh; /* ✅ CAMBIO: Altura fija */
+  overflow: hidden; /* ✅ CAMBIO: Ocultar overflow general */
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+}
+
+/* ✅ Botón cerrar mejorado */
+.modal-detalles-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2); /* ✅ CAMBIO: Más transparente */
+  border: 2px solid rgba(255, 255, 255, 0.8); /* ✅ NUEVO: Borde blanco */
+  color: white; /* ✅ CAMBIO: Ícono blanco */
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.modal-detalles-close:hover {
+  background: rgba(255, 255, 255, 0.9); /* ✅ CAMBIO: Blanco al hover */
+  color: #7E122A; /* ✅ CAMBIO: Rojo al hover */
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ Header del modal - SIN SCROLL */
+.modal-detalles-header {
+  padding: 25px 30px;
+  background: linear-gradient(135deg, #7E122A, #a31d36);
+  color: white; /* ✅ YA ESTÁ EN BLANCO */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #5d0e1f;
+  position: relative;
+  flex-shrink: 0; /* ✅ NUEVO: No se comprime */
+}
+
+.modal-detalles-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.3;
+  flex: 1;
+  padding-right: 60px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white; /* ✅ EXPLÍCITO: Blanco */
+}
+
+/* ✅ Botón aplicar ahora */
+.btn-aplicar-ahora {
+  background: rgba(255, 255, 255, 0.95); /* ✅ CAMBIO: Más opaco */
+  color: #7E122A;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+  min-width: 120px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* ✅ NUEVO: Sombra */
+}
+
+.btn-aplicar-ahora:hover:not(:disabled) {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+}
+
+.btn-aplicar-ahora:disabled {
+  background: rgba(108, 117, 125, 0.4);
+  color: rgba(255, 255, 255, 0.9); /* ✅ CAMBIO: Texto más visible */
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ Contador de postulaciones en el header */
+.modal-detalles-header > div > div {
+  color: rgba(255, 255, 255, 0.95); /* ✅ NUEVO: Texto blanco */
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* ✅ NUEVO: Sombra para legibilidad */
+}
+
+/* ✅ Info empresa y etiquetas - SIN SCROLL */
+.modal-detalles-info {
+  padding: 25px 30px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  flex-shrink: 0; /* ✅ NUEVO: No se comprime */
+}
+
+.modal-detalles-empresa {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  border-left: 3px solid #7E122A;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.modal-detalles-empresa .empresa-img {
+  width: 80px !important;
+  height: 80px !important;
+  flex-shrink: 0;
+  border: 3px solid #e9ecef !important;
+  transition: all 0.3s ease;
+}
+
+.modal-detalles-empresa .empresa-img:hover {
+  border-color: #7E122A !important;
+  transform: scale(1.05);
+}
+
+.modal-detalles-empresa > div {
+  flex: 1;
+}
+
+.modal-detalles-empresa > div > div:first-child {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000; /* ✅ Negro puro para mejor contraste */
+  margin-bottom: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-detalles-empresa > div > div {
+  font-size: 14px;
+  color: #495057; /* ✅ CAMBIO: Color más oscuro */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 3px 0;
+}
+
+/* ✅ Etiquetas mejoradas */
+.modal-detalles-etiquetas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modal-detalles-etiquetas .etiqueta {
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-detalles-etiquetas .etiqueta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Colores de etiquetas */
+.tag-especialidad { 
+  background: linear-gradient(135deg, #7E122A, #a31d36);
+  color: #ffffff;
+}
+
+.tag-modalidad-presencial { 
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  color: #ffffff;
+}
+
+.tag-modalidad-otro { 
+  background: linear-gradient(135deg, #ffc107, #ffcd39);
+  color: #212529;
+}
+
+.tag-apoyo-si { 
+  background: linear-gradient(135deg, #17a2b8, #20c997);
+  color: #ffffff;
+}
+
+.tag-apoyo-no { 
+  background: linear-gradient(135deg, #6c757d, #868e96);
+  color: #ffffff;
+}
+
+/* ✅ Íconos para etiquetas */
+.tag-especialidad::before {
+  content: '\f19d';
+  font-family: 'RemixIcon';
+}
+
+.tag-modalidad-presencial::before,
+.tag-modalidad-otro::before {
+  content: '\f1f3';
+  font-family: 'RemixIcon';
+}
+
+.tag-apoyo-si::before,
+.tag-apoyo-no::before {
+  content: '\f4c1';
+  font-family: 'RemixIcon';
+}
+
+/* ✅ Separador - SIN SCROLL */
+.modal-detalles-content hr {
+  margin: 0;
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+  flex-shrink: 0; /* ✅ NUEVO: No se comprime */
+}
+
+/* ✅ CONTENIDO CON SCROLL ROJO */
+.modal-detalles-body {
+  padding: 25px 30px;
+  overflow-y: auto; /* ✅ ÚNICO SCROLL */
+  flex: 1; /* ✅ Ocupa el espacio restante */
+  background: white;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ✅ SCROLLBAR ROJO PERSONALIZADO */
+.modal-detalles-body::-webkit-scrollbar {
+  width: 10px; /* ✅ Más ancho */
+}
+
+.modal-detalles-body::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.modal-detalles-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #7E122A, #a31d36); /* ✅ ROJO */
+  border-radius: 10px;
+  border: 2px solid #f8f9fa;
+}
+
+.modal-detalles-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5d0e1f, #7a1529); /* ✅ ROJO MÁS OSCURO */
+  box-shadow: 0 0 10px rgba(126, 18, 42, 0.5);
+}
+
+/* ✅ Párrafos del contenido */
+.modal-detalles-body p {
+  margin-bottom: 18px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #7E122A;
+  transition: all 0.3s ease;
+}
+
+.modal-detalles-body p:hover {
+  background: #e9ecef;
+  border-left-width: 5px;
+  transform: translateX(3px);
+}
+
+.modal-detalles-body p:last-child {
+  margin-bottom: 0;
+}
+
+.modal-detalles-body strong {
+  color: #7E122A; /* ✅ CAMBIO: Rojo para labels */
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.modal-detalles-body p:not(:has(strong)) {
+  font-size: 15px;
+  color: #212529; /* ✅ CAMBIO: Negro más oscuro */
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* ✅ Lista de aplicaciones (empresas) - CON SCROLL */
+.aplicaciones-list {
+  padding: 20px 30px;
+  background: #f8f9fa;
+  border-top: 2px solid #dee2e6;
+  overflow-y: auto; /* ✅ SCROLL INDEPENDIENTE */
+  max-height: 400px; /* ✅ ALTURA MÁXIMA */
+}
+
+.aplicaciones-list h3 {
+  color: #7E122A;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* ✅ SCROLLBAR ROJO PARA APLICACIONES */
+.aplicaciones-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.aplicaciones-list::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 10px;
+}
+
+.aplicaciones-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #7E122A, #a31d36); /* ✅ ROJO */
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+}
+
+.aplicaciones-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5d0e1f, #7a1529);
+}
+
+/* ✅ Tarjetas de aplicación */
+.aplicacion-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.aplicacion-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(126, 18, 42, 0.1);
+}
+
+/* ✅ Botones de aceptar/rechazar */
+.aplicacion-item button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.aplicacion-item button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.aplicacion-item button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ✅ Animaciones */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    backdrop-filter: blur(0px);
+  }
+  to { 
+    opacity: 1; 
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .modal-detalles-overlay {
+    padding: 10px;
+  }
+  
+  .modal-detalles-content {
+    max-height: 95vh;
+  }
+  
+  .modal-detalles-header {
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .modal-detalles-header h2 {
+    font-size: 18px;
+    padding-right: 50px;
+  }
+  
+  .modal-detalles-close {
+    top: 10px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+  
+  .modal-detalles-info,
+  .modal-detalles-body {
+    padding: 20px;
+  }
+  
+  .modal-detalles-empresa {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .modal-detalles-etiquetas {
+    justify-content: center;
+  }
+  
+  .btn-aplicar-ahora {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-detalles-header {
+    padding: 15px;
+  }
+  
+  .modal-detalles-header h2 {
+    font-size: 16px;
+  }
+  
+  .modal-detalles-info,
+  .modal-detalles-body {
+    padding: 15px;
+  }
+}
+
+/* ===== BOTÓN TERMINAR PROYECTO (PARA EMPRESAS) ===== */
+.btn-terminar-modal {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  border: 2px solid rgba(220, 53, 69, 0.3);
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-terminar-modal:hover {
+  background: linear-gradient(135deg, #c82333, #a71d2a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+  border-color: rgba(220, 53, 69, 0.5);
+}
+
+.btn-terminar-modal:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-terminar-modal i {
+  font-size: 18px;
+}
+
+/* ✅ Footer del modal con botones (si no existe) */
+.modal-footer {
+  padding: 20px 30px;
+  border-top: 2px solid #dee2e6;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.modal-footer button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* ===== RESPONSIVE PARA BOTONES ===== */
+@media (max-width: 768px) {
+  .modal-footer {
+    padding: 15px 20px;
+    flex-direction: column;
+  }
+
+  .modal-footer button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ✅ Ocultar scrollbar del body cuando el modal está abierto */
+body.modal-open {
+  overflow: hidden !important;
+}

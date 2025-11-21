@@ -1,0 +1,569 @@
+/* ✅ Contenedor principal limpio SIN ESPACIOS */
+.solicitudes-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 30px 20px;
+  box-sizing: border-box;
+}
+
+/* ✅ Header limpio con fondo blanco */
+.solicitudes-header {
+  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+  text-align: left;
+  background: white;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #7E122A;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.solicitudes-header:hover {
+  box-shadow: 0 4px 20px rgba(126, 18, 42, 0.12);
+}
+
+.solicitudes-header h1 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.solicitudes-header h1::before {
+  content: '\f1f6';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 32px;
+  animation: ring 2s ease-in-out infinite;
+}
+
+/* ✅ Animación de campanita */
+@keyframes ring {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10%, 30% {
+    transform: rotate(-10deg);
+  }
+  20%, 40% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+.solicitudes-header p {
+  color: #6c757d;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 8px 0 0 44px;
+  line-height: 1.6;
+}
+
+/* ✅ Estado vacío mejorado */
+.no-solicitudes {
+  text-align: center;
+  color: #6c757d;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 60px auto;
+  padding: 60px 40px;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #dee2e6;
+  font-family: 'Poppins', sans-serif;
+  max-width: 600px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.no-solicitudes::before {
+  content: '\f1f6';
+  font-family: 'RemixIcon';
+  font-size: 64px;
+  color: #dee2e6;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.no-solicitudes i {
+  display: none;
+}
+
+.no-solicitudes p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 18px;
+}
+
+/* ✅ Lista de solicitudes */
+.solicitudes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ✅ Cards de solicitud mejoradas */
+.solicitud-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 2px solid #f8f9fa;
+  transition: all 0.3s ease;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.solicitud-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7E122A 0%, #a31d36 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.solicitud-card:hover::before {
+  transform: scaleX(1);
+}
+
+.solicitud-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(126, 18, 42, 0.15);
+  border-color: #7E122A;
+}
+
+/* ✅ Animación escalonada */
+.solicitud-card:nth-child(1) { animation-delay: 0.1s; }
+.solicitud-card:nth-child(2) { animation-delay: 0.2s; }
+.solicitud-card:nth-child(3) { animation-delay: 0.3s; }
+.solicitud-card:nth-child(4) { animation-delay: 0.4s; }
+.solicitud-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* ✅ Header de la card */
+.solicitud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #7E122A 0%, #a31d36 100%);
+  color: white;
+}
+
+.solicitud-empresa {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.empresa-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+.solicitud-empresa h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+.badge-aceptado {
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  padding: 5px 14px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.badge-aceptado::before {
+  content: '\eb7a';
+  font-family: 'RemixIcon';
+  font-size: 14px;
+}
+
+.solicitud-fecha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 14px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.solicitud-fecha i {
+  font-size: 1rem;
+}
+
+/* ✅ Body de la card */
+.solicitud-body {
+  padding: 24px;
+}
+
+.solicitud-body h4 {
+  color: #333;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.solicitud-body h4::before {
+  content: '\f2b3';
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 1.5rem;
+}
+
+/* ✅ Info del proyecto */
+.proyecto-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #7E122A;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.info-item:hover {
+  background: #e9ecef;
+  border-left-width: 5px;
+  transform: translateX(3px);
+}
+
+.info-item i {
+  color: #7E122A;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ✅ Descripción del proyecto */
+.proyecto-descripcion {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 2px solid #e9ecef;
+}
+
+.proyecto-descripcion p {
+  margin: 10px 0;
+  color: #495057;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.proyecto-descripcion p strong {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+/* ✅ Footer de la card */
+.solicitud-footer {
+  padding: 20px 24px;
+  border-top: 2px solid #f8f9fa;
+  text-align: center;
+  background: #fafbfc;
+}
+
+/* ✅ Botón confirmar VERDE */
+.btn-confirmar {
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-confirmar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.btn-confirmar:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(40, 167, 69, 0.4);
+  background: linear-gradient(135deg, #218838, #28a745);
+}
+
+.btn-confirmar:active {
+  transform: translateY(0);
+}
+
+.btn-confirmar i {
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-confirmar span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ✅ Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .solicitudes-container {
+    padding: 0 15px 20px 15px;
+  }
+
+  .solicitudes-header {
+    font-size: 24px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .solicitudes-header h1 {
+    font-size: 24px;
+  }
+
+  .solicitudes-header h1::before {
+    font-size: 28px;
+  }
+
+  .solicitudes-header p {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+  }
+
+  .solicitud-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
+    align-items: flex-start;
+  }
+
+  .solicitud-empresa {
+    width: 100%;
+  }
+
+  .solicitud-fecha {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .solicitud-body {
+    padding: 20px;
+  }
+
+  .solicitud-body h4 {
+    font-size: 1.2rem;
+  }
+
+  .proyecto-info {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .btn-confirmar {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .solicitudes-container {
+    padding: 0 12px 16px 12px;
+  }
+
+  .solicitudes-header {
+    font-size: 20px;
+    padding: 16px;
+  }
+
+  .solicitudes-header h1 {
+    font-size: 20px;
+  }
+
+  .solicitudes-header h1::before {
+    font-size: 24px;
+  }
+
+  .solicitudes-header p {
+    font-size: 12px;
+  }
+
+  .solicitud-card {
+    margin-bottom: 16px;
+  }
+
+  .solicitud-header {
+    padding: 16px;
+  }
+
+  .empresa-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .solicitud-empresa h3 {
+    font-size: 1.1rem;
+  }
+
+  .badge-aceptado {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .solicitud-body {
+    padding: 16px;
+  }
+
+  .solicitud-body h4 {
+    font-size: 1.1rem;
+  }
+
+  .info-item {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .proyecto-descripcion {
+    padding: 16px;
+  }
+
+  .proyecto-descripcion p {
+    font-size: 0.85rem;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .proyecto-descripcion p strong {
+    min-width: auto;
+    font-size: 0.8rem;
+  }
+
+  .solicitud-footer {
+    padding: 16px;
+  }
+
+  .btn-confirmar {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .btn-confirmar i {
+    font-size: 1.1rem;
+  }
+
+  .no-solicitudes {
+    padding: 40px 20px;
+    font-size: 16px;
+  }
+
+  .no-solicitudes::before {
+    font-size: 48px;
+  }
+}

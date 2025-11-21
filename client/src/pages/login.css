@@ -7,11 +7,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* ✅ AGREGADO */
 }
+
 .overlay {
-  position: absolute;
-  inset: 0; /* top: 0; bottom: 0; left: 0; right: 0 */
-  background-color: rgba(200, 0, 0, 0.4); /* Rojo semitransparente */
+  position: fixed; /* ✅ CAMBIADO de absolute a fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(200, 0, 0, 0.4);
   z-index: 1;
 }
 
@@ -81,7 +86,52 @@
 }
 
 .error {
-  color: #ffc107;
+  color: #ffffff; /* Texto blanco */
   font-size: 14px;
   text-align: center;
+  font-weight: 600; /* Un poco más bold */
+  background: rgba(139, 0, 0, 0.7); /* Menos opaco, más transparente */
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 0;
+  border-left: 4px solid #8b0000; /* Borde un poco más grueso */
+  box-shadow: 0 3px 12px rgba(139, 0, 0, 0.3); /* Sombra más suave */
+  backdrop-filter: blur(2px); /* ✅ Efecto blur para mejor legibilidad */
+}
+
+.field-error {
+  color: #ffffff; /* Texto blanco */
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: 500;
+  background: rgba(139, 0, 0, 0.65); /* Transparente pero visible */
+  padding: 6px 10px;
+  border-radius: 6px;
+  border-left: 3px solid #8b0000;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.25);
+  backdrop-filter: blur(1px); /* ✅ Efecto blur sutil */
+}
+
+/* Animación para errores */
+.field-error, .error {
+  animation: fadeInError 0.3s ease-in;
+}
+
+@keyframes fadeInError {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estado de carga para el botón */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

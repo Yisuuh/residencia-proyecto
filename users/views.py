@@ -31,7 +31,7 @@ class UsuarioRegisterView(generics.CreateAPIView):
         access_token = str(refresh.access_token)
         refresh_token = str(refresh)
 
-        # Responder con los datos del usuario y los tokens
+        # ✅ ACTUALIZAR: Agregar role igual que en EmpresaRegisterView
         return Response(
             {
                 "user": {
@@ -39,7 +39,9 @@ class UsuarioRegisterView(generics.CreateAPIView):
                     "nombres": user.nombres,
                     "primer_apellido": user.primer_apellido,
                     "segundo_apellido": user.segundo_apellido,
+                    "role": user.role,  # ✅ AGREGAR ESTO
                 },
+                "role": user.role,  # ✅ AGREGAR ESTO
                 "access": access_token,
                 "refresh": refresh_token,
             },
@@ -98,6 +100,7 @@ class UserProfileView(APIView):
 
     def get(self, request):
         user = request.user
+
         return Response({
             "name": f"{user.nombres} {user.primer_apellido} {user.segundo_apellido}",
             "role": user.role,
@@ -105,6 +108,7 @@ class UserProfileView(APIView):
             "is_profile_complete": user.is_profile_complete,  # Incluye el estado del perfil
             "photo": request.build_absolute_uri(user.foto.url) if user.foto else None,  # Construye la URL completa
         })
+
 
 class CompletarPerfilView(APIView):
     permission_classes = [IsAuthenticated]
@@ -133,6 +137,30 @@ class CompletarPerfilView(APIView):
 class EmpresaRegisterView(generics.CreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = EmpresaRegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+
+        # Generar tokens (igual que UsuarioRegisterView)
+        refresh = RefreshToken.for_user(user)
+        access_token = str(refresh.access_token)
+        refresh_token = str(refresh)
+
+        # ✅ Responder con role incluido
+        return Response({
+            "user": {
+                "email": user.email,
+                "nombres": user.nombres,
+                "primer_apellido": user.primer_apellido,
+                "segundo_apellido": user.segundo_apellido,
+                "role": user.role,  # ✅ AGREGAR ESTO
+            },
+            "role": user.role,  # ✅ Y ESTO
+            "access": access_token,
+            "refresh": refresh_token,
+        }, status=status.HTTP_201_CREATED)
 
 class UsuarioListView(generics.ListAPIView):
     queryset = Usuario.objects.all()

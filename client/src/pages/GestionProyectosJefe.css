@@ -1,0 +1,460 @@
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.gestion-proyectos-jefe-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== TÍTULO ===== */
+.gestion-proyectos-jefe-title {
+  color: #333333 !important;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  margin-bottom: 25px !important;
+  text-align: center;
+  background: none !important;
+  text-shadow: none !important;
+  font-family: 'Poppins', sans-serif !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.gestion-proyectos-jefe-title i {
+  color: #7E122A;
+  font-size: 32px;
+}
+
+/* ===== ESTADÍSTICAS ===== */
+.proyectos-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card-proyecto {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-left: 4px solid #7E122A;
+  transition: transform 0.3s ease;
+}
+
+.stat-card-proyecto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card-proyecto.stat-activos {
+  border-left-color: #28a745;
+}
+
+.stat-card-proyecto.stat-terminados {
+  border-left-color: #6c757d;
+}
+
+.stat-card-proyecto.stat-con-alumnos {
+  border-left-color: #007bff;
+}
+
+.stat-number-proyecto {
+  font-size: 28px;
+  font-weight: 700;
+  color: #7E122A;
+  margin-bottom: 8px;
+}
+
+.stat-activos .stat-number-proyecto {
+  color: #28a745;
+}
+
+.stat-terminados .stat-number-proyecto {
+  color: #6c757d;
+}
+
+.stat-con-alumnos .stat-number-proyecto {
+  color: #007bff;
+}
+
+.stat-label-proyecto {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* ===== FILTROS ===== */
+.proyectos-filtros {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filtro-busqueda-proyecto {
+  position: relative;
+}
+
+.filtro-busqueda-proyecto i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.input-busqueda-proyecto {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-busqueda-proyecto:focus {
+  outline: none;
+  border-color: #7E122A;
+  box-shadow: 0 0 0 3px rgba(126, 18, 42, 0.1);
+}
+
+.input-busqueda-proyecto::placeholder {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.filtro-select-proyecto {
+  min-width: 150px;
+}
+
+.select-proyecto {
+  width: 100%;
+  padding: 12px 35px 12px 15px;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+.select-proyecto:focus {
+  outline: none;
+  border-color: #7E122A;
+  box-shadow: 0 0 0 3px rgba(126, 18, 42, 0.1);
+}
+
+.btn-limpiar-proyecto {
+  padding: 12px 16px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  min-width: 48px;
+  height: 48px;
+}
+
+.btn-limpiar-proyecto:hover {
+  background: #495057;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== TABLA ===== */
+.tabla-proyectos-wrapper {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-proyectos-jefe {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.tabla-proyectos-jefe th,
+.tabla-proyectos-jefe td {
+  padding: 14px 12px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tabla-proyectos-jefe th {
+  background: linear-gradient(135deg, #7E122A, #9d1b30);
+  color: white !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tabla-proyectos-jefe tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.tabla-proyectos-jefe tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.tabla-proyectos-jefe tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== CELDAS ESPECIALES ===== */
+.proyecto-nombre-cell {
+  font-weight: 600;
+  color: #2c3e50;
+  min-width: 200px;
+}
+
+.proyecto-contacto-cell {
+  min-width: 180px;
+}
+
+.contacto-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #495057;
+}
+
+.contacto-info i {
+  color: #7E122A;
+  font-size: 16px;
+}
+
+.proyecto-estudiantes-cell {
+  text-align: center;
+}
+
+.estudiantes-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.estudiantes-badge i {
+  font-size: 16px;
+}
+
+/* ===== TAGS Y BADGES ===== */
+.tag-modalidad-tabla,
+.tag-especialidad-tabla {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tag-modalidad-tabla {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  color: #7b1fa2;
+}
+
+.tag-especialidad-tabla {
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #388e3c;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado-badge.estado-activo {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  color: #155724;
+}
+
+.estado-badge.estado-terminado {
+  background: linear-gradient(135deg, #e2e3e5, #d6d8db);
+  color: #383d41;
+}
+
+/* ===== BOTÓN VER ===== */
+.btn-ver-proyecto {
+  background: #0d6efd;
+  border: 2px solid #0d6efd;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.btn-ver-proyecto:hover {
+  background: #0b5ed7;
+  border-color: #0b5ed7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+.btn-ver-proyecto i {
+  font-size: 16px;
+}
+
+/* ===== ESTADO VACÍO ===== */
+.proyectos-empty-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.empty-state-proyecto {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.empty-state-proyecto i {
+  font-size: 64px;
+  color: #dee2e6;
+  margin-bottom: 20px;
+}
+
+.empty-state-proyecto h3 {
+  color: #495057;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.empty-state-proyecto p {
+  color: #6c757d;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.btn-limpiar-empty-proyecto {
+  background: #7E122A;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-limpiar-empty-proyecto:hover {
+  background: #5d0e1f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(126, 18, 42, 0.3);
+}
+
+/* ===== LOADING ===== */
+.gestion-proyectos-jefe-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  gap: 20px;
+  color: #7E122A;
+}
+
+.gestion-proyectos-jefe-loading i {
+  font-size: 64px;
+  animation: spin 1s linear infinite;
+}
+
+.gestion-proyectos-jefe-loading p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .proyectos-filtros {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .filtro-busqueda-proyecto {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .proyectos-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .proyectos-filtros {
+    grid-template-columns: 1fr;
+  }
+  
+  .gestion-proyectos-jefe-title {
+    font-size: 24px !important;
+  }
+  
+  .tabla-proyectos-jefe {
+    font-size: 12px;
+  }
+  
+  .tabla-proyectos-jefe th,
+  .tabla-proyectos-jefe td {
+    padding: 10px 8px;
+  }
+}

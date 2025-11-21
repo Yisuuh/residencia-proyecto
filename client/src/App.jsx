@@ -20,6 +20,9 @@ import ResidentesAprobados from "./pages/ResidentesAprobados";
 import EstadoProyecto from "./pages/EstadoProyecto";
 import ExpedienteJefe from "./pages/ExpedienteJefe";
 import DashboardCoord from "./pages/DashboardCoord";
+import GestionProyectosJefe  from "./pages/GestionProyectosJefe";
+import ReportesJefe from "./pages/ReportesJefe";
+import ConfiguracionSistemaJefe from "./pages/ConfiguracionSistemaJefe";
 
 const alumnoMenuItems = [
   { name: "Inicio", path: "/dashboard/alumno/", icon: "ri-home-line" },
@@ -33,7 +36,7 @@ const jefeMenuItems = [
   { name: "Gestión de Usuarios", path: "/dashboard/jefe/usuarios", icon: "ri-user-settings-line" },
   { name: "Banco de Proyectos", path: "/dashboard/jefe/banco", icon: "ri-database-2-line" },
   { name: "Gestión de Proyectos", path: "/dashboard/jefe/gestion-proyectos", icon: "ri-briefcase-4-line" },
-  { name: "Configuración del Sistema", path: "/dashboard/jefe/configuracion", icon: "ri-settings-3-line" },
+  { name: "Configuración del Sistema", path: "/dashboard/jefe/configuracion-sistema", icon: "ri-settings-3-line" },
   { name: "Reportes", path: "/dashboard/jefe/reportes", icon: "ri-bar-chart-2-line" },
   { name: "Expedientes", path: "/dashboard/jefe/expedientes", icon: "ri-folder-line" },
 ];
@@ -96,7 +99,10 @@ const AppContent = ({ user, setUser }) => {
           <Route path="jefe" element={<DashboardJefeCarrera />} />
           <Route path="jefe/usuarios" element={<GestionUsuarios />} />
           <Route path="jefe/banco" element={<BancoAlumno />} />
+          <Route path="jefe/gestion-proyectos" element={<GestionProyectosJefe />} />
           <Route path="jefe/expedientes" element={<ExpedienteJefe />} />
+          <Route path="jefe/configuracion-sistema" element={<ConfiguracionSistemaJefe />} />
+          <Route path="jefe/reportes" element={<ProtectedRoute allowedRoles={["jefe_carrera"]}><ReportesJefe /></ProtectedRoute>} />
           <Route path="coordinador" element={<DashboardCoord />} />
           <Route path="coordinador/expedientes" element={<ExpedienteJefe />} />
         </Route>

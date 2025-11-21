@@ -27,21 +27,35 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return data
 
+# ✅ UsuarioSerializer con campo sexo
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ['id', 'email','nombres','primer_apellido', 'password', 'role', 'is_active', 'is_staff']
+        fields = [
+            'id', 
+            'email', 
+            'nombres', 
+            'primer_apellido', 
+            'segundo_apellido', 
+            'sexo',  # ✅ NUEVO: Campo sexo
+            'matricula',
+            'especialidad',
+            'telefono',
+            'role', 
+            'is_active', 
+            'is_staff',
+            'is_profile_complete'
+        ]
         extra_kwargs = {
             'password': {'write_only': True},
         }
 
     def create(self, validated_data):
-        """Crear un usuario con contraseña encriptada."""
-        validated_data['password'] = make_password(validated_data['password'])
+        if 'password' in validated_data:
+            validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        """Actualizar un usuario, manejando la contraseña correctamente."""
         if 'password' in validated_data:
             validated_data['password'] = make_password(validated_data['password'])
         return super().update(instance, validated_data)
@@ -52,20 +66,27 @@ class UsuarioRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
-        fields = ['email', 'password', 'confirm_password', 'nombres', 'primer_apellido', 'segundo_apellido', 'role']
+        fields = [
+            'email', 
+            'password', 
+            'confirm_password', 
+            'nombres', 
+            'primer_apellido', 
+            'segundo_apellido', 
+            'sexo',  # ✅ NUEVO: Campo sexo
+            'role'
+        ]
         extra_kwargs = {
             'password': {'write_only': True},
         }
 
     def validate_email(self, value):
-        """Validar que el email tenga un dominio permitido."""
         valid_domains = ['@merida.tecnm.mx', '@itmerida.edu.mx']
         if not any(value.endswith(domain) for domain in valid_domains):
             raise serializers.ValidationError(f"El email debe tener una de las siguientes terminaciones: {', '.join(valid_domains)}")
         return value
 
     def validate_password(self, value):
-        """Validar que la contraseña cumpla con los requisitos."""
         if not re.search(r'[A-Z]', value):
             raise serializers.ValidationError("La contraseña debe contener al menos una letra mayúscula.")
         if not re.search(r'[a-z]', value):
@@ -77,32 +98,33 @@ class UsuarioRegisterSerializer(serializers.ModelSerializer):
         return value
 
     def validate_nombres(self, value):
-        """Validar que los nombres solo contengan letras y espacios."""
         if not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$', value):
             raise serializers.ValidationError("El campo 'nombres' solo puede contener letras y espacios.")
         return value
 
     def validate_primer_apellido(self, value):
-        """Validar que el primer apellido solo contenga letras y guiones."""
         if not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ\-]+$', value):
             raise serializers.ValidationError("El campo 'primer_apellido' solo puede contener letras y guiones.")
         return value
 
     def validate_segundo_apellido(self, value):
-        """Validar que el segundo apellido solo contenga letras y guiones."""
         if not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ\-]+$', value):
             raise serializers.ValidationError("El campo 'segundo_apellido' solo puede contener letras y guiones.")
         return value
 
+    # ✅ NUEVO: Validación de sexo
+    def validate_sexo(self, value):
+        if value and value not in ['masculino', 'femenino']:
+            raise serializers.ValidationError("El sexo debe ser 'masculino' o 'femenino'.")
+        return value
+
     def validate(self, data):
-        """Validar que las contraseñas coincidan."""
         if data['password'] != data['confirm_password']:
             raise serializers.ValidationError({"password": "Las contraseñas no coinciden."})
         return data
 
     def create(self, validated_data):
-        """Crear un usuario con contraseña encriptada."""
-        validated_data.pop('confirm_password')  # Eliminar confirm_password antes de crear el usuario
+        validated_data.pop('confirm_password')
         validated_data['password'] = make_password(validated_data['password'])
         return Usuario.objects.create(**validated_data)
 
@@ -112,15 +134,21 @@ class EmpresaRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
-        fields = ['email', 'password', 'confirm_password', 'nombres', 'primer_apellido', 'segundo_apellido', 'role']
+        fields = [
+            'email', 
+            'password', 
+            'confirm_password', 
+            'nombres', 
+            'primer_apellido', 
+            'segundo_apellido', 
+            'sexo',  # ✅ NUEVO: Campo sexo
+            'role'
+        ]
         extra_kwargs = {
             'password': {'write_only': True},
         }
 
-    # No validamos dominio aquí
-
     def validate_password(self, value):
-        """Validar que la contraseña cumpla con los requisitos."""
         if not re.search(r'[A-Z]', value):
             raise serializers.ValidationError("La contraseña debe contener al menos una letra mayúscula.")
         if not re.search(r'[a-z]', value):
@@ -132,25 +160,27 @@ class EmpresaRegisterSerializer(serializers.ModelSerializer):
         return value
 
     def validate_nombres(self, value):
-        """Validar que los nombres solo contengan letras y espacios."""
         if not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$', value):
             raise serializers.ValidationError("El campo 'nombres' solo puede contener letras y espacios.")
         return value
 
     def validate_primer_apellido(self, value):
-        """Validar que el primer apellido solo contenga letras y guiones."""
         if not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ\-]+$', value):
             raise serializers.ValidationError("El campo 'primer_apellido' solo puede contener letras y guiones.")
         return value
 
     def validate_segundo_apellido(self, value):
-        """Validar que el segundo apellido solo contenga letras y guiones."""
         if not re.match(r'^[a-zA-ZáéíóúÁÉÍÓÚñÑ\-]+$', value):
             raise serializers.ValidationError("El campo 'segundo_apellido' solo puede contener letras y guiones.")
         return value
 
+    # ✅ NUEVO: Validación de sexo
+    def validate_sexo(self, value):
+        if value and value not in ['masculino', 'femenino']:
+            raise serializers.ValidationError("El sexo debe ser 'masculino' o 'femenino'.")
+        return value
+
     def validate(self, data):
-        """Validar que las contraseñas coincidan."""
         if data['password'] != data['confirm_password']:
             raise serializers.ValidationError({"password": "Las contraseñas no coinciden."})
         return data

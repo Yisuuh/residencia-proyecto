@@ -50,16 +50,48 @@ const EstadoProyecto = () => {
   return (
     <div className="estado-proyecto-container">
       <h2>Mi Proyecto Aceptado</h2>
-      <div className="proyecto-card">
-        {camposProyecto.map(({ key, label }) =>
-          proyecto[key] && (
-            <div className="proyecto-campo" key={key}>
-              <span className="proyecto-label">{label}:</span>
-              <span className="proyecto-valor">{proyecto[key]}</span>
-            </div>
-          )
-        )}
-      </div>
+      
+      {/* Información del alumno */}
+      {proyecto && proyecto.alumno && (
+        <div className="proyecto-card">
+          <h3>Información del Estudiante</h3>
+          <div className="proyecto-campo">
+            <span className="proyecto-label">Nombre:</span>
+            <span className="proyecto-valor">
+              {`${proyecto.alumno.nombres || ''} ${proyecto.alumno.primer_apellido || ''} ${proyecto.alumno.segundo_apellido || ''}`.trim()}
+            </span>
+          </div>
+          <div className="proyecto-campo">
+            <span className="proyecto-label">Email:</span>
+            <span className="proyecto-valor">{proyecto.alumno.email}</span>
+          </div>
+          <div className="proyecto-campo">
+            <span className="proyecto-label">Especialidad:</span>
+            <span className="proyecto-valor">{proyecto.alumno.especialidad}</span>
+          </div>
+          <div className="proyecto-campo">
+            <span className="proyecto-label">Estado:</span>
+            <span className="proyecto-valor" style={{color: 'green', fontWeight: 'bold'}}>
+              {proyecto.estado}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Información del proyecto */}
+      {proyecto && proyecto.proyecto && (
+        <div className="proyecto-card">
+          <h3>Información del Proyecto</h3>
+          {camposProyecto.map(({ key, label }) =>
+            proyecto.proyecto[key] && (
+              <div className="proyecto-campo" key={key}>
+                <span className="proyecto-label">{label}:</span>
+                <span className="proyecto-valor">{proyecto.proyecto[key]}</span>
+              </div>
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 };

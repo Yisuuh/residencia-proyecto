@@ -1,0 +1,221 @@
+.custom-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.custom-alert-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px; /* ✅ Vuelto al original */
+  width: 90%;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+}
+
+/* ✅ HEADER con padding original */
+.custom-alert-header {
+  padding: 25px 30px 15px; /* ✅ Padding original restaurado */
+  display: flex;
+  align-items: center;
+  gap: 15px; /* ✅ Gap original restaurado */
+  border-bottom: 1px solid #f1f3f4;
+  margin: 8px; /* ✅ NUEVO: Margen para separar del borde blanco */
+  border-radius: 8px; /* ✅ NUEVO: Esquinas redondeadas */
+}
+
+/* ✅ Success con espacio reducido */
+.custom-alert-header.success {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  margin: 10px; /* ✅ Más margen para separación */
+  padding: 20px 25px 12px; /* ✅ Padding ligeramente reducido */
+}
+
+/* ✅ Error con espacio reducido */
+.custom-alert-header.error {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  margin: 10px; /* ✅ Más margen para separación */
+  padding: 20px 25px 12px; /* ✅ Padding ligeramente reducido */
+}
+
+/* ✅ Warning mantiene su padding original (está perfecto) */
+.custom-alert-header.warning {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  margin: 8px; /* ✅ Margen normal */
+  padding: 25px 30px 15px; /* ✅ Padding original */
+}
+
+/* ✅ Info mantiene su padding original */
+.custom-alert-header.info {
+  background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+  margin: 8px; /* ✅ Margen normal */
+  padding: 25px 30px 15px; /* ✅ Padding original */
+}
+
+/* ✅ ÍCONOS - Solo Remix, código limpio */
+.custom-alert-icon {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.custom-alert-icon i {
+  display: block;
+}
+
+.success .custom-alert-icon {
+  color: #155724;
+  background: rgba(21, 87, 36, 0.1);
+}
+
+.error .custom-alert-icon {
+  color: #721c24;
+  background: rgba(114, 28, 36, 0.1);
+}
+
+.warning .custom-alert-icon {
+  color: #856404;
+  background: rgba(133, 100, 4, 0.1);
+}
+
+.info .custom-alert-icon {
+  color: #0c5460;
+  background: rgba(12, 84, 96, 0.1);
+}
+
+.custom-alert-title {
+  margin: 0;
+  font-size: 1.25rem; /* ✅ Tamaño original restaurado */
+  font-weight: 600;
+  color: #333;
+}
+
+/* ✅ BODY con padding original */
+.custom-alert-body {
+  padding: 20px 30px; /* ✅ Padding original restaurado */
+}
+
+.custom-alert-message {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  text-align: center;
+}
+
+/* ✅ BOTONES con padding original */
+.custom-alert-buttons {
+  display: flex;
+  gap: 25px; /* ✅ Gap original restaurado */
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 30px 30px; /* ✅ Padding original restaurado */
+  background: #f8f9fa;
+}
+
+.custom-alert-button {
+  border: none;
+  padding: 12px 25px; /* ✅ Padding original restaurado */
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* ✅ Gap original restaurado */
+  min-width: 120px; /* ✅ Ancho original restaurado */
+  justify-content: center;
+}
+
+/* ✅ Botón de confirmación */
+.custom-alert-button.confirm {
+  background: #7E122A;
+  color: white;
+  box-shadow: 0 4px 12px rgba(126, 18, 42, 0.3);
+}
+
+.custom-alert-button.confirm:hover {
+  background: #991731;
+  box-shadow: 0 6px 16px rgba(126, 18, 42, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ✅ Botón de cancelar */
+.custom-alert-button.cancel {
+  background: #f8f9fa;
+  color: #495057;
+  border: 2px solid #dee2e6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-alert-button.cancel:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+  color: #212529;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ✅ ANIMACIONES */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ✅ RESPONSIVE con padding original */
+@media (max-width: 480px) {
+  .custom-alert-container {
+    margin: 20px;
+    padding: 0;
+  }
+  
+  .custom-alert-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .custom-alert-button {
+    width: 100%;
+  }
+  
+  .custom-alert-header {
+    padding: 20px 25px 10px;
+  }
+  
+  .custom-alert-body { /* ✅ Corregido: era "alert_body" */
+    padding: 15px 25px;
+  }
+
+  .custom-alert-header.success,
+  .custom-alert-header.error {
+    margin: 8px;
+    padding: 18px 22px 10px;
+  }
+}

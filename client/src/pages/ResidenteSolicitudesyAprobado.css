@@ -1,0 +1,490 @@
+/* ✅ ESTILOS COMPARTIDOS PARA ResidentesEmpresa Y ResidentesAprobados */
+
+/* ✅ Contenedor principal limpio SIN ESPACIOS */
+.residentes-empresa-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 30px 20px;
+  box-sizing: border-box;
+}
+
+/* ✅ Header limpio con fondo blanco */
+.residentes-empresa-container > h2,
+.residentes-empresa-container h2 {
+  color: #2c3e50 !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  margin: 0 0 30px 0 !important;
+  text-align: left;
+  background: white !important;
+  text-shadow: none !important;
+  font-family: 'Poppins', sans-serif !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #7E122A;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.residentes-empresa-container > h2:hover,
+.residentes-empresa-container h2:hover {
+  box-shadow: 0 4px 20px rgba(126, 18, 42, 0.12);
+}
+
+/* ✅ Íconos del header según la página */
+.residentes-empresa-container.solicitudes > h2::before {
+  content: '\f007'; /* Ícono de persona para solicitudes */
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 32px;
+}
+
+.residentes-empresa-container.aprobados h2::before {
+  content: '\eb7a'; /* Ícono de check para aprobados */
+  font-family: 'RemixIcon';
+  color: #7E122A;
+  font-size: 32px;
+}
+
+/* ✅ Lista de residentes con grid mejorado */
+.residentes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ✅ Cards de residente rediseñadas */
+.residente-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 2px solid #f8f9fa;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+/* ✅ Borde superior según página */
+.residentes-empresa-container.solicitudes .residente-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7E122A 0%, #a31d36 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.residentes-empresa-container.aprobados .residente-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #28a745 0%, #34ce57 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.residente-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ✅ Hover según página */
+.residentes-empresa-container.solicitudes .residente-card:hover {
+  box-shadow: 0 8px 25px rgba(126, 18, 42, 0.15);
+  transform: translateY(-3px);
+  border-color: #7E122A;
+}
+
+.residentes-empresa-container.aprobados .residente-card:hover {
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+  transform: translateY(-3px);
+  border-color: #28a745;
+}
+
+/* ✅ Header de la card */
+.residente-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #f8f9fa;
+}
+
+/* ✅ Imagen de residente */
+.residente-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e9ecef;
+  background: #f8f9fa;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.residentes-empresa-container.solicitudes .residente-card:hover .residente-img {
+  border-color: #7E122A;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(126, 18, 42, 0.2);
+}
+
+.residentes-empresa-container.aprobados .residente-card:hover .residente-img {
+  border-color: #28a745;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+}
+
+/* ✅ Info del residente */
+.residente-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.residente-info h4 {
+  margin: 0;
+  color: #333333;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.residente-info p {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #495057;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.residente-info p:hover {
+  background: #e9ecef;
+  border-left-color: #7E122A;
+  transform: translateX(3px);
+}
+
+.residente-info p strong {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+.residente-info p span {
+  flex: 1;
+  word-break: break-word;
+}
+
+/* ✅ Estados */
+.estado-pendiente {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+  color: #856404;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(255, 193, 7, 0.3);
+}
+
+.estado-aceptado,
+.estado-aceptado_por_empresa {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+}
+
+.estado-rechazado {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+}
+
+/* ✅ Acciones */
+.residente-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 2px solid #f8f9fa;
+}
+
+/* ✅ Botón ver más */
+.btn-ver-mas {
+  flex: 1;
+  min-width: 120px;
+  background: linear-gradient(135deg, #7E122A, #a31d36);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(126, 18, 42, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-ver-mas:hover {
+  background: linear-gradient(135deg, #5d0e1f, #7a1529);
+  box-shadow: 0 6px 20px rgba(126, 18, 42, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ✅ Botones aceptar/rechazar */
+.btn-aceptar {
+  flex: 1;
+  min-width: 120px;
+  background: linear-gradient(135deg, #28a745, #34ce57);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-aceptar:hover {
+  background: linear-gradient(135deg, #218838, #28a745);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-rechazar {
+  flex: 1;
+  min-width: 120px;
+  background: linear-gradient(135deg, #dc3545, #e85d75);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-rechazar:hover {
+  background: linear-gradient(135deg, #c82333, #dc3545);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ✅ Estado vacío */
+.residentes-empresa-container > p {
+  text-align: center;
+  color: #6c757d;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 60px auto;
+  padding: 60px 40px;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #dee2e6;
+  font-family: 'Poppins', sans-serif;
+  max-width: 600px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.residentes-empresa-container > p::before {
+  content: '\f007';
+  font-family: 'RemixIcon';
+  font-size: 64px;
+  color: #dee2e6;
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* ✅ Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Animación escalonada */
+.residente-card:nth-child(1) { animation-delay: 0.05s; }
+.residente-card:nth-child(2) { animation-delay: 0.1s; }
+.residente-card:nth-child(3) { animation-delay: 0.15s; }
+.residente-card:nth-child(4) { animation-delay: 0.2s; }
+.residente-card:nth-child(5) { animation-delay: 0.25s; }
+.residente-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* ✅ Responsive */
+@media (max-width: 768px) {
+  .residentes-empresa-container {
+    padding: 0 15px 20px 15px;
+  }
+  
+  .residentes-empresa-container > h2,
+  .residentes-empresa-container h2 {
+    font-size: 24px !important;
+    padding: 20px !important;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .residentes-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .residente-card {
+    padding: 20px;
+  }
+  
+  .residente-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .residente-info p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .residente-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-ver-mas,
+  .btn-aceptar,
+  .btn-rechazar {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .residentes-empresa-container {
+    padding: 0 12px 16px 12px;
+  }
+  
+  .residentes-empresa-container > h2,
+  .residentes-empresa-container h2 {
+    font-size: 20px !important;
+    padding: 16px !important;
+  }
+  
+  .residente-card {
+    padding: 16px;
+    gap: 15px;
+  }
+  
+  .residente-img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .residente-info h4 {
+    font-size: 16px;
+  }
+  
+  .residente-info p {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  
+  .residente-info p strong {
+    min-width: auto;
+    font-size: 11px;
+  }
+}
